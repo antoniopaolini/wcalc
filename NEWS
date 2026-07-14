@@ -1,0 +1,454 @@
+--- Version 2.5 ---
+Changes:
+ - Color support
+ - Generic SI unit conversion
+Improvements:
+ - Improved documentation
+ - Increased precision for e constant
+ - More robust prefs parsing
+ - Prettier list output
+ - Better detection of libreadline variants
+ - Support for newer versions of autotools
+ - Support for \assert command
+ - Automatic testing infrastructure (via `make check`)
+Bugfixes:
+ - Fix 0 parsing bug (2.4.1 regression; thanks Arun Prakash Jana!)
+ - Plugged memory leaks
+ - Fixed segfault when parsing hierarchical expressions
+ - Fixed handling of Euler constant
+--- Version 2.4.1 ---
+Changes:
+ - Removed official support for the GUI
+Improvements:
+ - Clarity and corrections in documentation
+ - Flex/Lex handling improvements
+ - Better output (handling of print_ints, big/small numbers, etc.)
+ - More flexibility in building against GMP and MPFR
+ - Modernize the source code file layout
+ - Print variable description in variable list
+ - Fix output reinterpretation for octal and binary with delimiters
+ - Use -u option to print list of available units
+Bugfixes:
+ - Fix behavior with long HOME values
+ - Avoid potential segfault in number display
+ - Fix 0-precision exponent calculation during display
+ - Fix display of large exponents
+ - Don't use PATH_MAX
+ - Fix Debian bug 600255
+ - Fix \bits command
+ - Fix history filename handling
+--- Version 2.4 ---
+Oct 25 2008 - Kyle Wheeler
+ - Allow alternate input internationalization characters (BOTH)
+ - Use the OSX 10.4+ method of fetching internationalization settings (GUI)
+ - Fixed display if thousands/grouping separator is unset (BOTH)
+ - Made binary operations use a more intuitive rounding mode (BOTH)
+Oct 10 2008 - Kyle Wheeler
+ - Fixed a potential crash (CLI)
+ - Made bit-shifts behave a bit more intuitively for C programmers (BOTH)
+Aug 24 2008 - Kyle Wheeler
+ - Improved documentation of features (CLI)
+Jun 24 2008 - Kyle Wheeler
+ - Corrected engineering flag behavior (CLI)
+Jun 17 2008 - Kyle Wheeler
+ - Output localization more reliable (BOTH)
+May 13 2008 - Kyle Wheeler
+ - Corrected isinf/isnan behavior on some platforms (CLI)
+ - Improved Solaris compatibility (CLI)
+Mar 30 2008 - Kyle Wheeler
+ - Made preference file parsing more tolerant (CLI)
+Feb 20 2008 - Kyle Wheeler
+ - Made command explanations more tolerant of typos (BOTH)
+ - Expanded tab-completion (CLI)
+Feb 17 2008 - Kyle Wheeler
+ - Improved readline history detection (CLI)
+Feb 12 2008 - Kyle Wheeler
+ - Fixed the backwards compatibility logic (GUI)
+--- Version 2.3.1 ---
+Feb 08 2008 - Kyle Wheeler
+ - Make engineering notation a three-way toggle (BOTH)
+ - Accept input from a "wcalc_input" environment variable (CLI)
+Feb 04 2008 - Kyle Wheeler
+ - Make engineering configuration more reliable (CLI)
+Dec 05 2007 - Kyle Wheeler
+ - Accept @NaN@ and @Inf@ as input, fixes some compound operations (BOTH)
+Aug 24 2007 - Kyle Wheeler
+ - Add documentation for sinc and exp functions (CLI)
+Aug 23 2007 - Kyle Wheeler
+ - Sync preferences to disk more predictably (GUI)
+Aug 22 2007 - Kyle Wheeler
+ - Fix display glitches when auto-resizing (GUI)
+ - Add max-precision preference (GUI)
+ - Overhaul simpleCalc form, remove crashes, make more robust (GUI)
+Aug 14 2007 - Kyle Wheeler
+ - Fixed FORTRAN-style syntax errors (BOTH)
+Aug 02 2007 - Kyle Wheeler
+ - Updated licensing to be GPLv2+ compatible (BOTH)
+--- Version 2.3 ---
+Jul 20 2007 - Kyle Wheeler
+ - Added Wcalc Service to the Service menu (GUI)
+ - Compiled as a Universal Binary (BOTH)
+ - Lots of cleanup (BOTH)
+Jul 16 2007 - Kyle Wheeler
+ - Fixed the inspector-window-quits-program bug (GUI)
+ - Added angle and pressure conversions (BOTH)
+ - Fixed the insufficient variable precision bug (BOTH)
+ - Many number formatting fixes (BOTH)
+Jul 11 2007 - Kyle Wheeler
+ - Improved \prefs listing (CLI)
+Jul 10 2007 - Kyle Wheeler
+ - Avoid unexploitable buffer overflow in number formatting (BOTH)
+Apr 05 2007 - Kyle Wheeler
+ - Bohr title corrected (BOTH)
+ - kph synonyms added (BOTH)
+Dec 28 2006 - Kyle Wheeler
+ - Better error reporting (CLI)
+Dec 26 2006 - Kyle Wheeler
+ - Added tab-completion (CLI)
+ - Made conversion more forgiving (CLI)
+--- Version 2.2.2 ---
+Jul 09 2006 - Kyle Wheeler
+ - Added live precision toggle (GUI)
+ - Added modulus style preferences (BOTH)
+ - Improved preferences versioning (GUI)
+ - Eliminated negative zeros (BOTH)
+ - Improved commandline help (CLI)
+ - Plugged several small memory leaks (BOTH)
+ - Put a mutex around the precision slider update (GUI)
+Apr 21 2006 - Kyle Wheeler
+ - Better readline history detection (CLI)
+Mar 20 2006 - Kyle Wheeler
+ - Made modulus operator (%) efficient (BOTH)
+Mar 09 2006 - Kyle Wheeler
+ - Improved exponent handling for hex numbers (BOTH)
+ - Fixed the negative exponent bug (BOTH)
+Mar 02 2006 - Kyle Wheeler
+ - Improved several UI inconsistencies (GUI)
+Mar 01 2006 - Kyle Wheeler
+ - Added ability to copy from history/variable list (GUI)
+--- Version 2.2.1 ---
+Mar 01 2006 - Kyle Wheeler
+ - Fixed crash if you open the Persistent Variables window and immediately close it (GUI)
+--- Version 2.2 ---
+Feb 28 2006 - Kyle Wheeler
+ - Added sinc (BOTH)
+ - Added documentation of Gamma, lnGamma, zeta, K, and sinc (CLI)
+ - Added persistent variables (GUI)
+Feb 27 2006 - Kyle Wheeler
+ - Non-base ten decimals no longer infinitely long (BOTH)
+Feb 26 2006 - Kyle Wheeler
+ - Added internal bitcount control to GUI (GUI)
+ - MPFR version compatibility (CLI)
+Feb 23 2006 - Kyle Wheeler
+ - Implemented ~ as binary not (BOTH)
+Feb 21 2006 - Kyle Wheeler
+ - Units may be plural (CLI)
+ - Corrected unit names (BOTH)
+Feb 15 2006 - Kyle Wheeler
+ - Corrected several memory use errors and potential crashes (BOTH)
+ - Corrected lost errors (CLI)
+ - Added Gamma, lnGamma, sinc, and zeta functions (BOTH)
+ - added catalan (K) and enhanced the Euler constant (BOTH)
+Feb 14 2006 - Kyle Wheeler
+ - Much more extensive documentation (CLI)
+ - Added the ability to print numbers with separators (BOTH)
+Feb 13 2006 - Kyle Wheeler
+ - Corrected behavior for systems without READLINE_HISTORY (CLI)
+ - Corrected precision_guard test (BOTH)
+ - Corrected significant figure counting (BOTH)
+Jan 19 2006 - Kyle Wheeler
+ - Corrected the print_integers preference (CLI)
+Dec 10 2006 - Kyle Wheeler
+ - Better portability (CLI)
+ - Added a \explain command (CLI)
+ - Added a \store command (CLI)
+ - Faster recursion detection (BOTH)
+ - No longer confuses equivalence testing with assignment (BOTH)
+ - Corrected some minor usability bugs (GUI)
+ - Corrected \save behavior (BOTH)
+--- Version 2.1.2 ---
+Dec 01 2005 - Kyle Wheeler
+ - Fixed the resize behavior once and for all with a separate inspector (GUI)
+Nov 10 2005 - Kyle Wheeler
+ - Fix the menu display of arcsinh to be areasinh (GUI)
+Nov 08 2005 - Kyle Wheeler
+ - Variables should be quoted when read in from files (BOTH)
+Nov 07 2005 - Kyle Wheeler
+ - Connected drawers to main window again (GUI)
+--- Version 2.1.1 ---
+Nov 05 2005 - Kyle Wheeler
+ - Corrected UTF-8 parsing (thanks Marco Thill!) (BOTH)
+ - Corrected areasinh function names (thanks Marco Thill!) (BOTH)
+ - Compatibility with locales without thousands separators (thanks Marco Thill!) (GUI)
+ - Fixed repeat calculations bug (GUI)
+ - Fixed error reporting (GUI)
+Nov 02 2005 - Kyle Wheeler
+ - Fix possible double-free (BOTH)
+ - Fix logic errors in variable handling: variables where one is the prefix of another will not be confused (BOTH)
+ - Correct unabbreviated integer output for big numbers (BOTH)
+--- Version 2.1 ---
+Nov 01 2005 - Kyle Wheeler
+ - Make UTF-8 compatable (BOTH)
+ - Added Phi0 (magnetic flux quantum) (BOTH)
+ - Made gamma more accurate (BOTH)
+Oct 27 2005 - Kyle Wheeler
+ - Fix bug in storing variables when there's only one variable (BOTH)
+ - Added verbose command (CLI)
+Oct 26 2005 - Kyle Wheeler
+ - Fixed up autoconf/automake for Debian (CLI)
+ - Updated man page (CLI)
+ - Removed potential buffer overflow in variable name (BOTH)
+Oct 02 2005 - Kyle Wheeler
+ - Corrected man page bug (thanks Daniele Sempione!) (CLI)
+Aug 30 2005 - Kyle Wheeler
+ - Fix memory-leaks (BOTH)
+--- Version 2.0 ---
+Aug 28 2005 - Kyle Wheeler
+ - Answer field expands to reveal the entire answer, if necessary (GUI)
+ - Fixed the bizarre resizing behavior, finally! (GUI)
+ - Can display much more precision now (GUI)
+Jul 19 2005 - Kyle Wheeler
+ - Added a binary xor operator (BOTH)
+ - Added a comp(x) function that returns the one's compliment (BOTH)
+ - Can convert units from the command-line now (CLI)
+ - Improved the man page and online help (CLI)
+ - Reorganized the conversion units, to be easier to use (GUI)
+ - Many more scientific symbols, in standardized units now (BOTH)
+Jul 18 2005 - Kyle Wheeler
+ - Significant-figure rounding indication is more reliable now (BOTH)
+ - Added support for the \bits command for arbitrary precision (BOTH)
+ - \prefs display is more useful (CLI)
+ - ~/.wcalcrc parsing works now (CLI)
+ - Receiving an EOF will now *never* cause an ugly error message (CLI)
+Jun 10 2005 - Kyle Wheeler
+ - Selecting the Planck constant from the menu produces the correct symbol (GUI)
+ - Fixed the reduce/reduce conflicts in the parser (BOTH)
+--- Version 1.7 ---
+Jan 04 2004 - Kyle Wheeler
+ - Compiling tweaks for Solaris
+Dec 29 2003 - Kyle Wheeler
+ - Added a "simple" calculator feature (GUI)
+ - Updated autoconf/automake (CLI)
+ - Committed old fix for bad variable substitution (BOTH)
+ - Misc bug fixes (BOTH)
+ - Accepts numbers of the form "5." without the quotes (BOTH)
+Dec 25 2003 - Kyle Wheeler
+ - More informative math errors. (BOTH)
+ - Code cleanup (BOTH)
+Sep 30 2003 - Kyle Wheeler
+ - Fixed file loading (CLI)
+Aug 25 2003 - Kyle Wheeler
+ - Fixed error stickyness. Thanks Ingo van Lil! (CLI)
+ - Cleaned up variable recursion detection. Thanks Ingo! (BOTH)
+--- Version 1.6.2 ---
+Aug 21 2003 - Kyle Wheeler
+ - Fixed the print integers preference (GUI)
+ - Fixed the recursion detection, so symbols should work again (BOTH)
+ - Fixed incorrect output on some errors (CLI)
+ - Fixed a crash in Linux when errors are reported (CLI)
+--- Version 1.6.1 ---
+Aug 19 2003 - Kyle Wheeler
+ - Avoid command/variable conflicts (BOTH)
+Aug 18 2003 - Kyle Wheeler
+ - Fixed repeatable crash on Linux (CLI)
+ - Fixed recursion detection (BOTH)
+Aug 17 2003 - Kyle Wheeler
+ - Fixed small, one time, memory leak (CLI)
+Aug 09 2003 - Kyle Wheeler
+ - Added irandom, rand(), and irand() (BOTH)
+Jul 12 2003 - Kyle Wheeler
+ - Added bitwise operators & and | and ~ (BOTH)
+Apr 19 2003 - Kyle Wheeler
+ - Fix some flatten problems (BOTH)
+ - Compilation fixes (Solaris)
+Mar 25 2003 - Kyle Wheeler
+ - Made "always print integers" a preference (BOTH)
+ - Compilation fixes (Linux)
+Mar 24 2003 - Kyle Wheeler
+ - Added cot to the menus (GUI)
+ - Fixed log2 silliness (BOTH)
+--- Version 1.6 ---
+Mar 22 2003 - Kyle Wheeler
+ - Errors now beep. (GUI)
+ - Added open/save/saveAs to create/load script files. (BOTH)
+Mar 20 2003 - Thomas Steinhausen
+ - Fixed decimal key display in non-USA countries (GUI)
+Mar 19 2003 - Kyle Wheeler
+ - Added recursion detection. (BOTH)
+Feb 28 2003 - Kyle Wheeler
+ - Fixed the arc- trig functions in degree mode. (BOTH)
+ - Made readline respect the history length preference. (CLI)
+ - Added rounding indication to the CLI. (CLI)
+ - Added rounding indication command. (BOTH)
+Feb 24 2003 - Kyle Wheeler
+ - If it's just an integer, print the whole thing (BOTH)
+ - Added support for persistent preferences in ~/.wcalcrc (CLI)
+Feb 21 2003 - Kyle Wheeler
+ - Added cot acot coth acoth and reformatted a little (BOTH)
+Feb 19 2003 - Kyle Wheeler
+ - Added some display functions for variables and prefs (CLI)
+ - Finally fixed the bizarre window behavior (GUI)
+--- Version 1.5.2.1 ---
+Feb 02 2003 - Kyle Wheeler
+ - Fixed the ^D bug when compiled without readline (CLI)
+Jan 29 2003 - Kyle Wheeler
+ - Uses more standard rpm macros (CLI)
+--- Version 1.5.2 ---
+Jan 27 2003 - Kyle Wheeler
+ - Modified to use automake/autoconf (CLI)
+Jan 23 2003 - Kyle Wheeler
+ - Fixed the internationalization stuff (BOTH).
+ - Added history length limiting.
+Jan 17 2003 - Kyle Wheeler
+ - Added clearing functions for History and Variables (BOTH)
+Jan 16 2003 - Kyle Wheeler
+ - Alphabetized conversion listings (GUI)
+ - Fixed sticky error messages (BOTH)
+Dec 18 2002 - Kyle Wheeler
+ - Added the log2 command (BOTH).
+Nov 01 2002 - Kyle Wheeler
+ - Fixed a crasher in error reporting (BOTH).
+--- Version 1.5.1 ---
+Oct 20 2002 - Kyle Wheeler
+ - Added an option to avoid precision pitfalls (BOTH).
+ - Recompiled for Jaguar (BOTH).
+Oct 03 2002 - Kyle Wheeler
+ - Lists variables in command-line mode (CLI)
+Sep 08 2002 - Kyle Wheeler
+ - Another way to tell it "hex" (BOTH)
+ - Fixed the division thing (GUI)
+--- Version 1.5 ---
+Aug 08 2002 - Kyle Wheeler
+ - Added conversions (GUI)
+Jul 31 2002 - Kyle Wheeler
+ - Added support for comments (#, //, /* */) (BOTH)
+ - Supports "active" variables (BOTH)
+Jul 30 2002 - Kyle Wheeler
+ - Prints prefixes (0x, etc) by default. (CLI)
+Jul 29 2002 - Kyle Wheeler
+ - Added left and right bitshift operations (BOTH)
+May 21 2002 - Kyle Wheeler
+ - '=' and 'clear' work when you press the keys (GUI)
+Apr 12 2002 - Kyle Wheeler
+ - Pre-process input to solve comma/period problem (BOTH)
+ - Specify separators on the fly in the command-line (CLI)
+Apr 10 2002 - Kyle Wheeler
+ - Added a preference to ignore erroneous expressions (GUI)
+Mar 28 2002 - Kyle Wheeler
+ - Saves drawer states (GUI)
+--- Version 1.4.5 ---
+Mar 07 2002 - Kyle Wheeler
+ - Added cube root (cbrt) (BOTH)
+ - Added rounding indicator (GUI)
+ - Added square function (BOTH)
+Mar 04 2002 - Kyle Wheeler
+ - Added a base-drawer (GUI)
+Mar 02 2002 - Kyle Wheeler
+ - Fixed the live preference display (GUI)
+ - Fixed the menu's response to the drawer state (GUI)
+ - Made the preference Panel Modeless (GUI)
+ - Implemented strict_syntax preference (BOTH)
+Mar 01 2002 - Kyle Wheeler
+ - Removed all but one reserved variable (CLI)
+ - Period button becomes a comma button depending on comma preference (GUI)
+ - Added confusing-number garbage collector (BOTH)
+ - Moved commands to parser for GUI and piped file support (BOTH)
+ - Fixed division symbol & continuous expressions (GUI)
+ - Full international comma support (BOTH)
+ - CLI doesn't ignore some errors anymore (CLI)
+ - Fixed crasher in precision output (BOTH)
+Feb 28 2002 - Kyle Wheeler
+ - Added CLI variable parsing strictness toggle (CLI)
+ - Added sqrt, ceil, and floor functions (BOTH)
+ - Fixed binary output (BOTH)
+ - Fixed crasher in comma output (BOTH)
+Feb 27 2002 - Kyle Wheeler
+ - Fixed the comma parsing (BOTH)
+--- Version 1.4.4 ---
+Feb 27 2002 - Kyle Wheeler
+ - Fixed clamping errors (BOTH)
+--- Version 1.4.3 ---
+Feb 26 2002 - Kyle Wheeler
+ - Added a preference to output numbers with a comma (BOTH)
+ - Added error reporting to the commandline (CLI)
+ - Fixed a rounding error (BOTH)
+Feb 24 2002 - Kyle Wheeler
+ - Fixed the scanner (0.9 now means 0.9 and not 0 * .9) (BOTH)
+ - History redisplay is configurable now (GUI)
+--- Version 1.4.2 ---
+Feb 20 2002 - Kyle Wheeler
+ - Fixed the editing-after-pressing-a-button error (I'm an idiot) (GUI)
+ - Fixed the window-position saving routines (GUI)
+ - The problem with window sizing has gotten *worse* since updating OS X (GUI)
+Feb 12 2002 - Kyle Wheeler
+ - Accepts commas as period replacements (BOTH)
+--- Version 1.4.1 ---
+Feb 10 2002 - Kyle Wheeler
+ - Added output commands to the GUI too (GUI)
+ - Fixed debug output in the CLI (CLI)
+ - Compiled everything statically - no more library problems! (BOTH)
+ - Supports real division symbol (Ö) (BOTH)
+ - Random is now truly random, if the system supports it - relies on /dev/random (BOTH)
+--- Version 1.4 ---
+Feb  6 2002 - Kyle Wheeler
+ - Saves the history (max of 1000 lines - should this be configurable?) (CLI)
+ - New commands in the CLI - (most) old ones will disappear next version (CLI)
+ - Supports hex (0x), octal (0), and binary (0b) input and output (BOTH)
+ - Cleared out some pointless error messages (CLI)
+ - Improved factorials (BOTH)
+ - Miscellaneous Bugfixes (BOTH)
+ - Tried to fix a window drifting problem (GUI)
+Feb  4 2002 - Kyle Wheeler
+ - Added a "Result" column to the history (GUI)
+--- Version 1.3 ---
+Feb  3 2002 - Kyle Wheeler
+ - More improvements to the parser (BOTH)
+ - Added LOTS of constants (BOTH)
+Feb  2 2002 - Kyle Wheeler
+ - Added menus for functions and symbols (GUI)
+ - Added absolute value "abs()" (BOTH)
+ - Added a bunch of physical constants to the symbols (BOTH)
+ - Saves toggled status (GUI)
+Jan 30 2002 - Kyle Wheeler
+ - Added the ability to toggle the presence of the keypad (GUI)
+--- Version 1.2 ---
+Jan 29 2002 - Kyle Wheeler
+ - Fixed the grammar again (BOTH)
+ - Began work on continuous calculations (GUI)
+Jan 28 2002 - Kyle Wheeler
+ - Fixed a typo in the grammar (BOTH)
+ - Added a command-equivalent to the preferences window (GUI)
+ - Added the version number to the about box (GUI)
+ - Corrected the version number display
+Jan 26 2002 - Kyle Wheeler
+ - Fixed the grammar (MUCH better now) (BOTH)
+Jan 25 2002 - Kyle Wheeler
+ - Added checks to catch values with too much precision (BOTH)
+ - Precision slider won't go too far anymore (GUI)
+ - Remembers the window position (GUI)
+ - Quits when the window is closed (GUI)
+ - Saves Preferences! (GUI)
+ - Expanded the vocabulary (asin,arcsin,sin^-1) (BOTH)
+Jan 24 2002 - Kyle Wheeler
+ - Added a preference to toggle using Radians (GUI)
+ - Made the history font smaller (GUI)
+ - Fixed a crasher in the history list. (GUI)
+ - Can now do floating point mods (BOTH)
+ - "random" means a random value (BOTH)
+ - added round() to round a value to the nearest value (BOTH)
+Jan 21 2002 - Kyle Wheeler
+ - Rewrote the Variable management - now it's simpler, slower, more useful (BOTH)
+ - Variable GUI list is functioning!
+ - History list selection now replaces the current expression
+ - Pickiness about undefined variables is configurable (GUI-only)
+ - Made it approximately the size of Apple's calculator
+ - Prefs are their own window now
+ - Logging duplicates in the history is configurable (GUI-only).
+ - Need to redo commands in command-line version (perhaps \q to quit, \dups for history dups... eh?)
+ - Fixed the boolean thing - now both !4 and 4! work (!4 = 0, 4! = 24, !0 = 1)
+ - Discovered that 9+-9 doesn't work... dunno how to fix. I'll think about it. (is this critical?)
+Jan 20 2002 - Kyle Wheeler
+ - Fixed the factorial parsing (non-elegant solution)
+ - Added GUI Engineering Notation toggle (template for future preferences, if any)
+ - Decided I have to rewrite the variable storage mechanism to get the GUI list working. :(
+ - Need to save prefs somehow...

@@ -1,0 +1,652 @@
+.de Id
+.ds Dt \\$4
+..
+.ds = \-\^\-
+.de Sp
+..
+.TH wcalc 1
+.SH NAME
+wcalc \- a natural-expression command-line calculator
+.SH SYNOPSIS
+.B wcalc
+[ \fIoptions\fR ] [ \fIexpression ...\fR ]
+.SH DESCRIPTION
+wcalc is a command-line calculator designed to accept all valid mathematical
+expressions. It supports all standard mathematical operations, parenthesis,
+brackets, trigonometric functions, hyperbolic trig functions, logs, and
+boolean operators.
+.PP
+wcalc accepts input in a variety of manners. If no mathematical expression is
+given at the commandline, it will evaluate the contents of an environment
+variable named \fIwcalc_input\fP if one exists. If that variable is not set,
+wcalc will try to read input from standard input (i.e. piped input). If there
+is no input from that, wcalc enters "interactive" mode. Interactive mode has
+more features.
+.PP
+While in interactive mode, detailed information about commands, functions, symbols, and variables can be obtained by executing: \fB\eexplain\fP \fIthing-to-explain\fP
+.SS OPTIONS
+.TP 4
+\fB\-H\fP or \fB\*=help\fP
+Prints a help usage message to standard output, then exits.
+.TP
+\fB\-E\fP
+Specifies that numerical output should be in scientific notation.
+.TP
+\fB\-EE\fP
+Specifies that numerical output should NOT be in scientific notation.
+.TP
+\fB\-P\fIXXX\fP
+Sets the "precision", or the number of decimal places displayed, to be \fIXXX\fP. This setting only affects output, not internal representations. If the precision is set to \-1, the number of decimal places displayed will depend on the value.
+.br
+Precision is set to autoadjust (\-1) by default.
+.br
+Example: wcalc \-P6
+.TP
+\fB\-v\fP or \fB\*=version\fP
+Prints the version number and exits.
+.TP
+\fB\-d\fP or \fB\-dec\fP or \fB\*=decimal\fP
+Results are printed in decimal (base 10). This option is the default, and does not have a default prefix to indicate that numbers are in base 10.
+.TP
+\fB\-h\fP or \fB\-hex\fP or \fB\*=hexadecimal\fP
+Results are printed in hexadecimal (base 16). Numbers printed in hexadecimal have a prefix of \fI0x\fP unless the \fB\-p\fP or \fB\*=prefixes\fP option is used.
+.TP
+\fB\-o\fP or \fB\-oct\fP or \fB\*=octal\fP
+Results are printed in octal (base 8). Numbers printed in octal have a prefix of \fI0\fP unless the \fB\-p\fP or \fB\*=prefixes\fP option is used.
+.TP
+\fB\-b\fP or \fB\-bin\fP or \fB\*=binary\fP
+Results are printed in binary (base 2). Numbers printed in binary have a prefix of \fI0b\fP unless the \fB\-p\fP or \fB\*=prefixes\fP option is used.
+.TP
+\fB\-p\fP or \fB\*=prefixes\fP
+Toggles printing prefixes for hexadecimal, octal, and binary forms.
+.TP
+\fB\-l\fP or \fB\*=lenient\fP
+Makes the parser assume that uninitialized variables have a value of zero.
+.TP
+\fB\-r\fP or \fB\*=radians\fP
+Toggles whether trigonometric functions assume input (and output) is in
+radians. By default, trigonometric functions assume input is in degrees.
+.TP
+\fB\-q\fP or \fB\*=quiet\fP
+Toggles whether the equals sign will be printed before the results.
+.TP
+\fB\-c\fP or \fB\*=conservative\fP
+Toggles accuracy guards. Because of the way floating point numbers are stored in computers, some numbers cannot be represented exactly (such as 0.1). Because of this, calculating with those numbers can produce results that are not
+.I exactly
+correct, but are different from the correct answer by a very small value (smaller than the floating point value can represent accurately). For example, the calculation of 1\-.9\-.1 can return an extremely small number that is not zero but is less than what can be represented accurately, and thus for all intents and purposes, it is 0. The accuracy guard feature will round numbers to zero if they are less than the representable accuracy of the floating point number. However, sometimes numbers that small or smaller need to be displayed, and thus the accuracy guard should be turned off. Alternatively, the number of internal bits could be increased, which makes it possible to represent numbers with more accuracy.
+.TP
+\fB\-u\fP or \fB\*=units\fP [\fItype\fP]
+Prints units used for conversions; parameter \fBtype\fP can be: lengths, areas, volumes, masses, speeds, powers, forces, accelerations, temperatures, angles, or pressures. If the parameter is not supplied, all units are printed.
+.TP
+\fB\*=remember\fP
+Toggles whether or not expressions that produce errors are remembered in the history. Does not affect command-line math.
+.TP
+\fB\*=round=\fP { \fInone\fP | \fIsimple\fP | \fIsig_fig\fP }
+Wcalc can attempt to warn you when numbers have been rounded in the output display. It has two methods of keeping track---either by using significant figures (sig_fig), or by a simple digit-counting algorithm. Rounding in the command-line version is denoted by a tilde before the equals sign (~=). Rounding in the GUI version is denoted by changing the text color to red. In some cases, Wcalc may think that the number has been rounded even if it shouldn't have been necessary (this is because of the way floating point numbers are represented internally).
+.TP
+\fB\*=dsep=\fIX\fP
+Sets the decimal separator character to be X.
+.TP
+\fB\*=tsep=\fIX\fP
+Sets the thousands separator character to be X.
+.TP
+\fB\*=idsep=\fIX\fP
+Sets the input-only decimal separator character to be X.
+.TP
+\fB\*=itsep=\fIX\fP
+Sets the input-only thousands separator character to be X.
+.TP
+\fB\*=bits\fIXXXX\fP
+Sets the number of bits of memory that will be used to internally represent numbers to be \fIXXXX\fP. The default is 1024. Set higher if you need to work with extremely large or extremely small numbers, set lower if you want to use less memory.
+.TP
+\fB\*=ints\fP
+Toggles whether long integers will be abbreviated or not. This conflicts with engineering notation for large numbers, but not for decimals.
+.TP
+\fB\*=verbose\fP
+Toggles verbose mode, which displays the expression to be calculated before calculating it.
+.TP
+\fB\*=defaults\fP
+Prevents reading the .wcalcrc file.
+.TP
+\fB-C\fP or \fB\*=color\fP
+Toggles the use of color in the commandline output.
+.SH USER-DEFINED VARIABLES
+Variables are supported and may be assigned using the = operator. To assign
+a variable use the form:
+.RS
+.PP
+foo = anylegalexpression
+.RE
+.PP
+Thereafter, that variable name is the same as the literal value it represents.
+Expressions can be stored in variables like this:
+.RS
+.PP
+foo = 'anylegalexpression'
+.RE
+.PP
+Expressions stored this way will be interpreted at evaluation time, rather
+than assignment-time. Note that these cannot be recursive.
+.PP
+All variables may also be stored with a description of what they are. This description is added in the form of a quoted string after the assignment, like this:
+.RS
+.PP
+foo = 'anylegalexpression' 'description'
+.RE
+.SS ACTIVE VARIABLES
+Active variables are designed to give a functionality similar to user-defined functions. They are variables that rather than representing a value, represent an expression that is evaluated whenever the variable is evaluated. This expression may contain other variable names. For example, after the following sequence of commands:
+.RS
+.PP
+foo=5
+.br
+bar='foo+4'
+.RE
+.PP
+The variable \fIbar\fP will evaluate to 9, or four more than whatever \fIfoo\fP evaluates to be. These can be stacked, like so:
+.RS
+.PP
+baz='sin(bar)+foo'
+.RE
+.PP
+In this case, \fIbaz\fP will evaluate to be 5.15643, or the sin of whatever \fIfoo\fP+4 is plus whatever \fIfoo\fP is.
+.PP
+To demonstrate the utility of these active variables, here are two functions written by Stephen M. Lawson. The first computes the weekday of a given day (\fIdy\fP) in a given month (\fImo\fP) in a given year (\fIyr\fP). The value it returns is in the range of 1 to 7, where 1 is Sunday, 2 is Monday, 3 is Tuesday, and so forth.
+.PP
+weekday='(((floor((yr \- floor(0.6 + 1 / mo)) / 400) \- floor((yr \- floor(0.6 + 1 / mo)) / 100) + floor((5 * (yr \- floor(0.6 + 1 / mo))) / 4) + floor(13 * (mo + 12 * floor(0.6 + 1 / mo) + 1) / 5)) \- (7 * floor((floor((yr \- floor(0.6 + 1 / mo)) / 400) \- floor((yr \- floor(0.6 + 1 / mo)) / 100) + floor((5 * (yr \- floor(0.6 + 1 / mo))) / 4) + floor(13 * (mo + 12 * floor(0.6 + 1 / mo) + 1) / 5)) / 7)) + 1) + 5 + dy) % 7 + 1'
+.PP
+The second function computes what day Easter will be for a given year (\fIyr\fP) and returns an offset from March 31st. For example, for the year 2005, it returns \-4, which means March 27th. Because of leap-year problems, this only works from the year 1900 to 2099, but is a good demonstration nevertheless.
+.PP
+easter='((19 * (yr \- 19 * floor(yr / 19)) + 24) \- floor((19 * (yr \- 19 * floor(yr / 19)) + 24) / 30) * 30) + ((2 * (yr \- 4 * floor(yr / 4)) + 4 * (yr \- 7 * floor(yr / 7)) + 6 * ((19 * (yr \- 19 * floor(yr / 19)) + 24) \- floor((19 * (yr \- 19 * floor(yr / 19)) + 24) / 30) * 30) + 5) \- floor((2 * (yr \- 4 * floor(yr / 4)) + 4 * (yr \- 7 * floor(yr / 7)) + 6 * ((19 * (yr \- 19 * floor(yr / 19)) + 24) \- floor((19 * (yr \- 19 * floor(yr / 19)) + 24) / 30) * 30) + 5) / 7) * 7) \- 9'
+.SH BUILT-IN SYMBOLS
+There are two basic kinds of built-in symbols in wcalc: functions and constants.
+.SS FUNCTIONS
+The functions supported in wcalc are almost all self-explanatory. Here are the basic descriptions.
+.TP 4
+.B "sin cos tan cot"
+The standard trigonometric functions
+.TP
+\fBasin acos atan acot\fP or \fBarcsin arccos arctan arccot\fP or \fBsin^-1 cos^-1 tan^-1 cot^-1\fP
+The standard arc- trigonometric functions.
+.TP
+.B "sinh cosh tanh coth"
+The standard hyperbolic trigonometric functions.
+.TP
+\fBasinh acosh atanh acoth\fP or \fBarcsinh arccosh arctanh arccoth\fP or \fBsinh^-1 cosh^-1 tanh^-1 coth^-1\fP
+The standard arc- hyperbolic trigonometric functions.
+.TP
+.B "log ln logtwo"
+Log-base-ten, log-base-e and log-base-two, respectively. Remember, you can also construct log-base-X of number Y by computing log(Y)/log(X).
+.TP
+.B "round"
+Returns the integral value nearest to the argument according to the typical rounding rules.
+.TP
+.B "abs"
+Returns the absolute value of the argument.
+.TP
+.B "ceil ceiling floor"
+Returns the ceiling or floor of the argument.
+.TP
+.B "sqrt cbrt"
+The square and cube root functions.
+.TP
+.B "rand"
+Returns a random number between 0 and the number given.
+.TP
+.B "irand"
+Returns a random integer between 0 and the number given.
+.TP
+.B "fact"
+Returns the factorial of a number.
+.TP
+.B "Gamma"
+Returns the value of the Gamma function at that value.
+.TP
+.B "lnGamma"
+Returns the value of the log Gamma function at that value.
+.TP
+.B "zeta"
+Returns the value of the Riemann zeta function at that value.
+.TP
+.B "sinc"
+Returns the sinc function (for sinus cardinalis) of the input, also known as the interpolation function, filtering function or the first spherical Bessel function, is the product of a sine function and a monotonically decreasing function.
+.SS CONSTANTS
+Wcalc supports a lot of constants. Some are special (like \fBpi\fP), and some are simply mathematical or physical constants that have been hardcoded in. The physics constants are taken from \fIhttp://physics.nist.gov/constants\fP, and should all be in predictable SI units.
+.PP
+The value of \fBpi\fP is special, as it is calculated to however many bits of precision have been specified with the \fB\ebits\fP command. The default number of bits is 1024, or a value of:
+.br
+3.14159265358979323846264338327950288419716939937
+.br
+5105820974944592307816406286208998628034825342117
+.br
+0679821480865132823066470938446095505822317253594
+.br
+0812848111745028410270193852110555964462294895493
+.br
+0381964428810975665933446128475648233786783165271
+.br
+2019091456485669234603486104543266482133936072602
+.br
+4914127372458699747248223615028234079551511205588
+.br
+1168465696731309335738719301105597412739780116660
+.br
+0823447367841524950037348489795545416453901986117
+.br
+5727227318713884226435889742120217131949568051423
+.br
+0839931356624755337162012934002605160185668467703
+.br
+3122428187855479365508702723110143458240736806341
+.br
+7989633389232864603510897727208179195996751333631
+.br
+1014750579717366267579547177770281431880438556092
+.br
+9672479177350549251018537674006123614790110383192
+.br
+5028979233679937836193101666790131879693151725794
+.br
+3860403036395703382632593537215128964016797694845
+.br
+3904619615481368332936937026831888367580239969088
+.br
+9326975278116532822249504103365733859441905164461
+.br
+4642369403738060905908822203694572794411694624061
+.br
+6684848934170304346480406820774078369140625
+.PP
+Similarly, all values that rely on the value of \fBpi\fP, like mu0, have the same level of precision. Here is a complete list of the symbols used to represent the constants hardcoded into wcalc:
+.TP 4
+.B "e"
+The logarithm constant:
+.br
+2.718281828459045235360287471352662497757247093699959574966
+.TP
+.B "gamma"
+Euler's Constant: 0.5772156649015328606065120900824024310421
+.br
+593359399235988057672348848677267776646709369470632917467495
+.br
+146314472498070824809605040144865428362241739976449235362535
+.br
+0033374293733773767394279259525824709491600873520394816567
+.TP
+.B K
+Catalan Constant: 0.9159655941772190150546035149323841107741
+.br
+493742816721342664981196217630197762547694793565129261151062
+.br
+485744226191961995790358988033258590594315947374811584069953
+.br
+3202877331946051903872747816408786590902
+.TP
+.B "g"
+Acceleration due to gravity: 9.80665 m/s/s
+.TP
+.B Cc
+Coulomb's Constant: 8987551787.37
+.SS Universal Constants
+.TP 4
+\fBZ0\fP or \fBZzero\fP
+Impedance of Vacuum: 376.730313461 ohms
+.TP
+\fBepsilon0\fP or \fBepsilonzero\fP
+Permittivity of Free Space: 8.854187817e-12 F/m
+.TP
+\fBmu0\fP or \fBmuzero\fP
+Permeability of Free Space calculated as 4*pi*10^-7.
+.TP
+.B "G"
+Gravitational Constant: 6.67259e-11
+.TP
+.B "h"
+Planck Constant: 6.6260755e-34
+.TP
+.B "c"
+Speed of Light: 299792458
+.SS Electromagnetic Constants
+.TP 4
+.B "muB"
+Bohr Magneton: 5.78838174943e-11 J/T
+.TP
+.B "muN"
+Nuclear Magneton: 3.15245123824e-14 J/T
+.TP
+.B "G0"
+Conductance Quantum: 7.748091733e-5 S
+.TP
+.B "ec"
+Elementary Charge: 1.60217653e-19
+.TP
+.B Kj
+Josephson Constant: 483597.879e9 Hz/V
+.TP
+.B Rk
+Von Klitzing Constant: 25812.807449 omega
+.SS Atomic and Nuclear Constants
+.TP 4
+.B Malpha
+Alpha Particle Mass: 6.6446565e-27 kg
+.TP
+.B "a0"
+Bohr Radius: 5.291772108e-11 m
+.TP
+.B "Md"
+Deuteron Mass: 3.34358335e-27 kg
+.TP
+.B "Me"
+Electron Mass: 9.1093897e-31 kg
+.TP
+.B "re"
+Electron Radius: 2.817940325e-15 m
+.TP
+.B "eV"
+Electron Volt: 1.602177250e-12 J
+.TP
+.B Gf
+Fermi Coupling Constant: 1.16638e-5 GeV^-2
+.TP
+.B "alpha"
+Fine Structure Constant: 7.29735253327e-3
+.TP
+.B eh
+Hartree Energy: 4.35974417e-18 J
+.TP
+.B Mh
+Helion Mass: 5.00641214e-27 kg
+.TP
+.B Mmu
+Muon Mass: 1.88353140e-28 kg
+.TP
+.B "Mn"
+Neutron Mass: 1.67492728e-27 kg
+.TP
+.B "Mp"
+Proton Mass: 1.67262171e-27 kg
+.TP
+.B Rinf
+Rydberg Constant: 10973731.568525 1/m
+.TP
+.B Mt
+Tau Mass: 3.16777e-27 kg
+.SS Physio-Chemical Constants
+.TP 4
+.B "u"
+Atomic Mass Constant: 1.66053886e-27 kg
+.TP
+\fBNa\fP or \fBNA\fP
+Avogadro's Constant: 6.0221367e23
+.TP
+.B "k"
+Boltzmann Constant: 1.3806505e-23
+.TP
+.B "F"
+Faraday Constant: 96485.3383 C/mol
+.TP
+.B c1
+First Radiation Constant: 3.74177138e-16 W m^2
+.TP
+\fBn0\fP or \fBnzero\fP
+Loschmidt Constant: 2.6867773e25 m^-3
+.TP
+.B "R"
+Molar Gas Constant: 8.314472
+.TP
+\fBVm\fP or \fBNAk\fP
+Molar Volume of Ideal Gas: 22.413996e-3 (m^3)/mol
+.TP
+.B c2
+Second Radiation Constant: 1.4387752e-2 m K
+.TP
+.B "sigma"
+Stefan-Boltzmann Constant: 5.670400e-8
+.TP
+.B "b"
+Wien Displacement Law Constant: 2.8977686e-3 m K
+.SS Random Constants
+.TP 4
+.B "random"
+A Random Value
+.TP
+.B "irandom"
+A Random Integer
+.SH SPECIAL SYMBOLS
+There are some special symbols that wcalc accept as input for compound operations.
+.TP 
+.B "@Inf@" 
+Symbol that represents Infinity
+.TP
+.B "@NaN@"
+Symbol that represents "Not a Number"
+.SH COMMANDS
+There are several commands that are supported in wcalc.
+.TP
+\fB\ep\fIXXX\fP
+Sets the "precision", or the number of decimal places displayed, to be \fIXXX\fP. This setting only affects output, not internal representations. If the precision is set to \-1, the number of decimal places displayed will depend on the value. The default is \-1.
+.TP
+\fB\ee\fP or \fB\eeng\fP or \fB\eengineering\fP
+Rotates between always using scientific notation, never using scientific
+notation, and choosing to do scientific notation when convenient. Can also take
+an argument that is one of \fIalways\fP, \fInever\fP, and \fIautomatic\fP to
+choose a mode directly.
+.TP
+\fB\ehelp\fP or \fB?\fP
+Displays a help screen.
+.TP
+.B "\eprefs"
+Prints out the current preference settings.
+.TP
+\fB\eli\fP or \fB\elist\fP or \fB\elistvars\fP
+Prints out the currently defined variables.
+.TP
+\fB\er\fP or \fB\eradians\fP
+Toggles between using and not using radians for trigonometric calculations.
+.TP
+\fB\econs\fP or \fB\econservative\fP
+Toggles accuracy guards. Because of the way floating point numbers are stored in computers, some numbers cannot be represented exactly (such as 0.1). Because of this, calculating with those numbers can produce results that are not exactly correct, but are different from the correct answer by a very small value (smaller than the floating point value can represent accurately). For example, the calculation of 1\-.9\-.1 can return an extremely small number that is not zero but is less than what can be represented accurately, and thus for all intents and purposes, it is 0. The accuracy guard feature will round numbers to zero if they are less than the representable accuracy of the floating point number. However, sometimes numbers that small or smaller need to be displayed, and thus the accuracy guard should be turned off. Alternatively, the number of internal bits could be increased, which makes it possible to represent numbers with more accuracy.
+.TP
+\fB\ep\fP or \fB\epicky\fP or \fB\el\fP or \fB\elenient\fP
+Toggles variable parsing rules. When wcalc is "picky" it will complain if you use undefined variables. If it is "lenient", wcalc will assume a value of 0 for undefined variables.
+.TP
+\fB\ere\fP or \fB\eremember\fP or \fB\eremember_errors\fP
+Toggles whether or not expressions that produce errors are remembered in the history.
+.TP
+\fB\epre\fP or \fB\eprefix\fP or \fB\eprefixes\fP
+Toggles the display of prefixes for hexadecimal, octal, and binary output.
+.TP
+\fB\eb\fP or \fB\ebin\fP or \fB\ebinary\fP
+Results are printed in binary (base 2). Numbers printed in binary have a prefix of \fI0b\fP unless the \fB\eprefixes\fP command is used.
+.TP
+\fB\ed\fP or \fB\edec\fP or \fB\edecimal\fP
+Results are printed in decimal (base 10). This option is the default, and does not have a default prefix to indicate that numbers are in base 10.
+.TP
+\fB\eh\fP or \fB\ex\fP or \fB\ehex\fP or \fB\ehexadecimal\fP
+Results are printed in hexadecimal (base 16). Numbers printed in hexadecimal have a prefix of \fI0x\fP unless the \fB\eprefixes\fP command is used.
+.TP
+\fB\eo\fP or \fB\eoct\fP or \fB\eoctal\fP
+Results are printed in octal (base 8). Numbers printed in octal have a prefix of \fI0\fP unless the \fB\eprefixes\fP command is used.
+.TP
+\fB\eround\fP \fInone\fP|\fIsimple\fP|\fIsig_fig\fP
+Wcalc can attempt to warn you when numbers have been rounded in the output display. It has two methods of keeping track---either by using significant figures (sig_fig), or by a simple digit-counting algorithm. Rounding in the command-line version is denoted by a tilde before the equals sign (~=). Rounding in the GUI version is denoted by changing the text color to red. In some cases, Wcalc may think that the number has been rounded even if it shouldn't have been necessary (this is because of the way floating point numbers are represented internally).
+.TP
+\fB\edsep\fIX\fP
+Sets the decimal separator character to be \fIX\fP.
+.TP
+\fB\etsep\fIX\fP
+Sets the thousands-place separator character to be \fIX\fP.
+.TP
+\fB\eidsep\fIX\fP
+Sets the input-only decimal separator character to be \fIX\fP.
+.TP
+\fB\eitsep\fIX\fP
+Sets the input-only thousands-place separator character to be \fIX\fP.
+.TP
+\fB\ehlimit\fIX\fP
+Sets the limit (\fIX\fP) on the length of the history.
+.TP
+\fB\eopen \fIfilename.txt\fP
+Loads file \fIfilename.txt\fP.
+.TP
+\fB\esave \fIfilename.txt\fP
+Saves the current session and variable list to a file, \fIfilename.txt\fP.
+.TP
+\fB\ebits\fIXXXX\fP
+Sets the number of bits of precision that will be used to internally represent numbers to be \fIXXXX\fP. The default is 1024. Set higher if you need more precision, set lower if you want to use less memory.
+.TP
+.B \eints
+Toggles whether long integers will be abbreviated or not. This conflicts with engineering notation for large numbers, but not for decimals.
+.TP
+\fB\eprefs\fP or \fB\epreferences\fP
+Displays the current preference settings.
+.TP
+\fB\econvert\fP \fIunit1\fP \fIunit2\fP
+Converts the previous answer from \fIunit1\fP to \fIunit2\fP.
+.TP
+\fB\estore\fP \fIvariablename\fP
+Saves the specified variable in the preload file, ~/.wcalc_preload
+.TP
+\fB\eexplain\fP \fIobject\fP
+Explains the specified object. The object can be a variable, constant, function, or command.
+.TP
+\fB\everbose\fP
+Verbose mode displays the expression to be calculated before calculating it.
+.TP
+\fB\edel\fP or \fB\edelim\fP or \fB\edelimiters\fP
+Display delimiters in numerical output.
+.TP
+\fB\ecmod\fP
+Toggle between C-style modulus operation and a more flexible method.
+.TP
+\fB\ecolor\fP
+Toggles the use of color in the commandline output.
+.SH PREFERENCES
+Preferences and settings can be retained between invocations of wcalc by storing them in the file \fB~/.wcalcrc\fP
+.PP
+The format of the file is that each line is either blank or an assignment. Comments are ignored, and are defined as anything to the right of and including a hash mark (#). Assignments are of the form: \fIkey=value\fP
+.PP
+The possible keys are:
+.TP
+.B precision
+A number defining the display precision. Equivalent to the \fB\eP\fP command, where \-1 means "auto" and anything else specifies the number of decimal places. This does not affect the behind-the-scenes precision.
+.TP
+.B show_equals
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB--quiet\fP argument. Specifies whether answers will begin with an equals sign or not.
+.TP
+.B engineering
+Either "always", "never", or "automatic". Equivalent to the \fB\eengineering\fP command. Specifies whether answers will be displayed in engineering notation or not.
+.TP
+.B use_radians
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\eradians\fP command. Specifies whether trigonometric functions accept input in radians or degrees.
+.TP
+.B print_prefixes
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\eprefixes\fP command. Specifies whether base prefixes (e.g. 0x for hexadecimal numbers) are used when displaying output.
+.TP
+.B save_errors
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\eremember_errors\fP command. Specifies whether lines that contain a syntax error are added to the history or not.
+.TP
+.B precision_guard
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\econservative\fP command. Specifies whether the display will attempt to eliminate numbers too small to be accurate (hopefully, these are only errors created by the binary approximation of the inputs).
+.TP
+.B print_integers
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\eints\fP command. Specifies whether whole integers will be printed un-abbreviated or not. This conflicts with engineering notation for large integers, but not for decimals.
+.TP
+.B print_delimiters
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\edelimiters\fP command. Specifies whether delimiters will be added to output when displaying.
+.TP
+.B thousands_delimiter
+Uses the next character after the equals sign as its value. Equivalent to the \fB\etsep\fP command. Specifies what the thousands delimiter is, and can affect output if \fBprint_delimiters\fP is enabled.
+.TP
+.B decimal_delimiter
+Uses the next character after the equals sign as its value. Equivalent to the \fB\edsep\fP command. Specifies what the decimal delimiter is.
+.TP
+.B input_thousands_delimiter
+Uses the next character after the equals sign as its value. Equivalent to the \fB\eitsep\fP command. Specifies what the input-only thousands delimiter is, and cannot affect output.
+.TP
+.B input_decimal_delimiter
+Uses the next character after the equals sign as its value. Equivalent to the \fB\eidsep\fP command. Specifies what the input-only decimal delimiter is, and cannot affect output.
+.TP
+.B history_limit
+Either "no", for no limit, or a number. Equivalent to the \fB\ehlimit\fP command.
+.TP
+.B output_format
+Either \fIdecimal\fP, \fIoctal\fP, \fIbinary\fP, \fIhex\fP, or \fIhexadecimal\fP.
+.TP
+.B rounding_indication
+Either \fIno\fP, \fIsimple\fP, or \fIsig_fig\fP. Equivalent to the \fB\erounding\fP command.
+.TP
+.B c_style_mod
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\ecmod\fP command. Specifies whether the modulo operator (%) will behave as it does in the C programming language, or whether it will use a more flexible method. This only affects modulo operations where negative numbers are involved. As an example, with \fBc_style_mod\fP set to true (the default):
+.RS
+.PP
+\-340 % 60 == \-40; 340 % \-60 == 40; \-340 % \-60 == \-40
+.PP
+However, with \fBc_style_mod\fP set to false:
+.PP
+\-340 % 60 == \-40; 340 % \-60 == \-20; \-340 % \-60 == 20
+.RE
+.TP
+.B color
+Either true ("yes" or "true") or false (anything else). Equivalent to the \fB\ecolor\fP command. Specifies whether the commandline interface will use color in its output or not.
+.TP
+.B colors[\fIXXX\fB]
+This is used to specify the color of specific interface elements in the commandline interface. Valid colors are:
+.RS
+.RS
+(bold)black
+.br
+(bold)red
+.br
+(bold)green
+.br
+(bold)yellow
+.br
+(bold)blue
+.br
+(bold)magenta
+.br
+(bold)cyan
+.br
+(bold)white
+.RE
+The \fIXXX\fP must be one of the following values:
+.RS
+conversion_category
+.br
+conversion_unit
+.br
+prompt
+.br
+approx_answer
+.br
+exact_answer
+.br
+err_location
+.br
+err_text
+.br
+pref_name
+.br
+pref_val
+.br
+pref_cmd
+.br
+status
+.br
+var_name
+.br
+var_desc
+.br
+subvar_name
+.br
+explanation
+.SH PRELOAD
+Wcalc uses a file, \fB~/.wcalc_preload\fP, to store persistent information between instances. Typically, this is used to store variables that are frequently defined. This file can be edited by hand with a standard text editor. There is also a command within wcalc (\fB\estore\fP) to append a variable definition to the end of this file. Any variable defined in this file is defined and available for use in any subsequent invocation of wcalc.
+.SH COPYRIGHT
+wcalc is Copyright (C) 2000-2014 Kyle Wheeler.
+.br
+It is distributed under the GPL, version 2, or (at your option) any later version..
+.SH SUGGESTIONS AND BUG REPORTS
+Any bugs found should be reported to
+.br
+Kyle Wheeler at \fIkyle-wcalc@memoryhole.net\fP.

@@ -1,0 +1,3213 @@
+2015-01-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am, test/Makefile.am: fix distcheck
+
+	* COPYRIGHT, ChangeLog, NEWS, README, configure.ac: prep for 2.5
+
+	* wcalc.1: correct color command documentation
+
+	* src/common/iscmd.c: document color command online
+
+2015-01-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* configure.ac: update version to 2.5b, and update compile flags
+	  for newer systems
+
+	* src/common/isfunc.c: uncrustify
+
+	* src/common/isconst.c: uncrustify
+
+	* src/common/scanner.l: add missing header
+
+	* src/cli/main.c: fix warning about const cast
+
+	* src/common/calculator.c: fix logic errors in variable expansion;
+	  and uncrustify
+
+	* src/cli/main.c: remove unnecessary shadowed variable
+
+2014-12-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: document color configuration
+
+	* test.errors, test.recursion, test.vars, test/Makefile.am,
+	  test/active_variable.test, test/vars.test: more tests
+
+	* test/Makefile.am, test/err.assign.test,
+	  test/err.conv_category1.test, test/err.conv_category2.test,
+	  test/err.recursion1.test, test/err.recursion2.test,
+	  test/err.recursion3.test, test/err.recursion4.test,
+	  test/test.simple: expected failure test suite
+
+	* src/cli/main.c: exit on error correctly
+
+	* src/cli/main.c, src/common/calculator.c,
+	  src/common/includes/output.h, src/common/parser.y: better error
+	  output
+
+	* Makefile.am, configure.ac, test, test.simple, test/Makefile.am,
+	  test/basic_float.test, test/basic_ints.test,
+	  test/basic_math.test, test/basic_vars.test, test/checktest.sh,
+	  test/compound_math.test, test/conversion.test,
+	  test/err.assert.test, test/err.question.test,
+	  test/factorial.test, test/formatting.test,
+	  test/implicit_mult.test, test/precision_guard.test,
+	  test/test.simple, test/website_math.test: beginning test
+	  framework
+
+	* config: more build scripts
+
+	* src/common/calculator.c: better debug output
+
+	* src/common/number.c: better integer detection with MPFR
+
+	* src/common/parser.y: print line in assert
+
+	* src/cli/main.c: terminate scripts on failure
+
+	* src/common/parser.y, src/common/scanner.l: Fix hex/dec parsing
+	  without eliminating zeros, and make precision guard specifiable
+
+	* src/cli/main.c, src/common/explain.c, src/common/extract_vars.c,
+	  src/common/includes/explain.h, src/common/includes/isconst.h,
+	  src/common/includes/isfunc.h, src/common/isconst.c,
+	  src/common/isfunc.c, src/common/scanner.l: rework the explanatory
+	  data structures, to reduce list duplication (duplication
+	  potentially leads to missing documentation)
+
+	* src/common/includes/add_commas.h,
+	  src/common/includes/calculator.h,
+	  src/common/includes/conversion.h, src/common/includes/evalvar.h,
+	  src/common/includes/explain.h,
+	  src/common/includes/extract_vars.h, src/common/includes/files.h,
+	  src/common/includes/iscmd.h, src/common/includes/isconst.h,
+	  src/common/includes/isfunc.h, src/common/includes/list.h,
+	  src/common/includes/number.h,
+	  src/common/includes/number_formatting.h,
+	  src/common/includes/output.h, src/common/includes/string_manip.h,
+	  src/common/includes/variables.h: update uncrustification
+
+	* src/common/parser.y, src/common/scanner.l: implement \assert
+	  command
+
+	* src/cli/main.c, src/common/explain.c,
+	  src/common/includes/explain.h, src/common/includes/iscmd.h,
+	  src/common/iscmd.c: revamped explanation/command structure; less
+	  duplication of command lists
+
+	* config: ignore new build script "compile"
+
+2014-05-14  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/number_formatting.c: fix double-free bug
+
+	* src/common/conversion.c: add METRIC_C handling
+
+2014-05-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/conversion.c, src/common/includes/conversion.h: Add
+	  generic SI-unit conversion (without a real unit)
+
+	* src/cli/main.c: tell readline to ignore color escapes
+
+2014-04-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/parser.y: allow big integers
+
+	* src/cli/main.c: swap the hard reset with a soft reset (avoid
+	  weird characters when color=no), and add special characters for
+	  the readline prompt to tell readline to ignore the non-printing
+	  characters when calculating prompt length
+
+2014-01-16  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/cli/main.c: symmetry with the readline behavior
+
+2014-01-15  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/cli/main.c, src/common/calculator.c, src/common/evalvar.c,
+	  src/common/extract_vars.c, src/common/list.c,
+	  src/common/variables.c: misc minor improvements suggested by
+	  cppcheck
+
+	* src/common/calculator.c, src/common/number_formatting.c: fix
+	  warnings produced by clang --analyze
+
+2014-01-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: shorten long lines of contants
+
+	* configure.ac, configure.in: autoconf will be dropping support for
+	  the old filename
+
+2013-12-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/scanner.l: These prototypes avoid warnings on old
+	  versions of flex, but are incompatible with new versions of flex;
+	  so we remove them. Still get warnings with old versions, but
+	  that's better than incompatibility with new versions.
+
+2013-12-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/cli/main.c: avoid snprintf; gain readability
+
+	* src/common/scanner.l: add prototypes to suppress warnings on old
+	  versions of MacOS X
+
+	* src/common/list.c: remove stdio from list module
+
+	* src/common/parser.y: fix r907
+
+	* src/common/parser.y: use strncpy instead of snprintf
+
+	* src/common/conversion.c: remove dependence on stdio
+
+	* src/common/isconst.c: remove dependence on stdio
+
+	* src/common/includes/variables.h: remove dependence on stdio
+
+	* src/common/files.c: remove dependence on stdio
+
+	* src/common/explain.c: correct boundary condition for strncat
+
+	* src/common/explain.c: remove dependency on stdio
+
+	* src/cli/main.c: readline-only error check
+
+2013-12-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* config/readline.m4: detect the rl_filename_completion_function
+	  rather than the more simplistic readline function
+
+2013-12-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/cli/main.c: make the rest of the colorable objects
+	  configurable
+
+	* src/cli/main.c, src/common/explain.c, src/common/files.c,
+	  src/common/includes/output.h, src/common/isconst.c: remove the
+	  last printfs and replace them with output functions
+
+	* src/common/number.c: remove debugging output
+
+	* src/cli/main.c, src/common/explain.c,
+	  src/common/includes/output.h, src/common/parser.y: explanations
+	  use proper output functions now
+
+	* src/Makefile.am, src/cli/help.c, src/cli/main.c,
+	  src/common/Makefile.am, src/common/help.c,
+	  src/common/includes/output.h, src/common/variables.c: variable
+	  lists and variable assignments now display in color properly
+
+	* src/cli/main.c, src/common/calculator.c, src/common/explain.c,
+	  src/common/files.c, src/common/help.c,
+	  src/common/historyManager.c, src/common/includes/Makefile.am,
+	  src/common/includes/calculator.h, src/common/includes/help.h,
+	  src/common/includes/output.h, src/common/parser.y,
+	  src/common/variables.c: reworking output ("display") to make
+	  color more flexible; not done yet, but should also make a GUI
+	  frontend (or ncurses) easier to plug in
+
+2013-11-15  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/number_formatting.c: avoid leaking memory in output
+	  formatting
+
+	* src/cli/main.c: the prompt must be bigger to accommodate color
+	  strings
+
+	* configure.in: denote development in the version
+
+	* configure.in: update for modern versions of autoconf/automake
+
+2013-11-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/calculator.c, src/common/includes/Makefile.am,
+	  src/common/includes/calculator.h, src/common/includes/output.h:
+	  more color UI stuff; creating a better UI separation layer
+
+	* src/cli/main.c: refactored prefs parsing to be easier to read and
+	  more hierarchical; also added the beginning of a color UI
+
+2013-10-04  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/includes/definitions.h: even more precision for W_E
+
+	* src/common/includes/definitions.h: more precision for W_E
+
+	* src/common/number.c: fix num_const_euler
+
+2013-09-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: fix old typo
+
+	* src/common/evalvar.c: avoid memory leak
+
+2013-09-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/evalvar.c, src/common/explain.c,
+	  src/common/includes/evalvar.h: fix explain segfault for
+	  hierarchical expressions
+
+	* wcalc.1: document verbose and defaults options
+
+	* wcalc.1: be more descriptive about \save
+
+2013-09-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/variables.c: prettier output of variable list
+
+	* src/common/explain.c: prettify dependent variable output
+
+2013-09-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: missing space
+
+2013-09-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, NEWS, README: 2.4.1 (for real this time)
+
+	* src/cli/main.c: add "all" option to -u arg
+
+	* src/cli/main.c, src/common/help.c, wcalc.1: change -u behavior
+	  slightly, and document it
+
+	* src/common/variables.c: prettier variable list
+
+	* src/common/variables.c: missing newline in some cases
+
+	* src/common/files.c: fix minor memory leak in opening dot-files
+
+2013-09-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* src/common/help.c, wcalc.1: argument formatting
+
+	* src/common/help.c: fix typo - thanks Roger!
+
+	* AUTHORS, ChangeLog, NEWS, README, configure.in: backtrack - not
+	  releasing 2.4.1 JUST YET
+
+	* wcalc.1: document new options (-u and -U), ditch unit list for
+	  online unit list
+
+	* src/cli/main.c: require 2 letters
+
+	* src/cli/main.c, src/common/help.c: -U and -u (--units) for
+	  printing out the currently supported conversions and their
+	  aliases.
+
+	* src/common/conversion.c, src/common/includes/conversion.h: Make
+	  the text conversion categories universally accessible
+
+	* wcalc.1: list all the units in the man-page (thanks Roger!)
+
+	* src/common/conversion.c: typo - thanks Roger!
+
+2013-09-16  Kyle Wheeler <kbwheel@gmail.com>
+
+	* NEWS, README, configure.in: post-release commit
+
+	* ChangeLog: 2.4.1
+
+	* AUTHORS, NEWS, README: prep for 2.4.1 release
+
+	* Makefile.am, src/Makefile.am, src/common/Makefile.am,
+	  src/common/includes/Makefile.am: make distcheck work
+
+	* src/common/scanner.l: fix output reinterpretation for octal and
+	  binary when delimiters are turned on
+
+	* src/common/variables.c: print description in the variable list
+
+2013-03-06  Kyle Wheeler <kbwheel@gmail.com>
+
+	* NewWcalc.icns, TheW.icns, Wred.png, configure.in, graphics,
+	  graphics/NewWcalc.icns, graphics/TheW.icns, graphics/Wred.png,
+	  graphics/w.png, src/common/includes, w.png: more reorganizing
+
+	* memwatch.c, memwatch.h, src/cli/main.c, src/common/add_commas.c,
+	  src/common/calculator.c, src/common/conversion.c,
+	  src/common/evalvar.c, src/common/explain.c,
+	  src/common/extract_vars.c, src/common/files.c, src/common/help.c,
+	  src/common/historyManager.c, src/common/iscmd.c,
+	  src/common/isconst.c, src/common/isfunc.c, src/common/list.c,
+	  src/common/number_formatting.c, src/common/parser.y,
+	  src/common/scanner.l, src/common/string_manip.c,
+	  src/common/variables.c, src/gui/AboutBoxController.m,
+	  src/gui/ConversionList.m, src/gui/ErrorController.m,
+	  src/gui/HistoryList.m, src/gui/InspectorController.m,
+	  src/gui/MyTextField.m, src/gui/OldVariableList.m,
+	  src/gui/PersVarList.m, src/gui/VariableList.m,
+	  src/gui/WcalcController.m, src/gui/main.m, src/gui/simpleCalc.c,
+	  src/gui/theDelegate.m: remove memwatch
+
+	* .: ignore cscope
+
+	* src/common/includes/add_commas.h,
+	  src/common/includes/calculator.h,
+	  src/common/includes/conversion.h,
+	  src/common/includes/definitions.h, src/common/includes/evalvar.h,
+	  src/common/includes/explain.h,
+	  src/common/includes/extract_vars.h, src/common/includes/files.h,
+	  src/common/includes/help.h, src/common/includes/historyManager.h,
+	  src/common/includes/iscmd.h, src/common/includes/isconst.h,
+	  src/common/includes/isfunc.h, src/common/includes/list.h,
+	  src/common/includes/number.h,
+	  src/common/includes/number_formatting.h,
+	  src/common/includes/string_manip.h,
+	  src/common/includes/uint32_max.h,
+	  src/common/includes/variables.h: uncrustified
+
+	* src/cli/main.c, src/common/add_commas.c, src/common/calculator.c,
+	  src/common/conversion.c, src/common/evalvar.c,
+	  src/common/explain.c, src/common/extract_vars.c,
+	  src/common/files.c, src/common/help.c,
+	  src/common/historyManager.c, src/common/includes/variables.h,
+	  src/common/iscmd.c, src/common/isconst.c, src/common/isfunc.c,
+	  src/common/list.c, src/common/number.c,
+	  src/common/number_formatting.c, src/common/string_manip.c,
+	  src/common/variables.c: uncrustified
+
+	* src/cli/main.c, src/common/calculator.c, src/common/evalvar.c,
+	  src/common/files.c, src/common/includes/isconst.h,
+	  src/common/includes/variables.h, src/common/isconst.c,
+	  src/common/number.c, src/common/parser.y,
+	  src/common/string_manip.c: removing compiler warnings
+
+	* configure.in: more flags
+
+	* Makefile.am, configure.in, simpleCalc.c, simpleCalc.h,
+	  src/Makefile.am, src/gui, src/gui/Makefile.am,
+	  src/gui/includes/simpleCalc.h, src/gui/simpleCalc.c: gui files
+	  needed a Makefile
+
+	* configure.in: restore flags
+
+	* autogen.sh: fix executable state
+
+	* Makefile.am: fix config directory handling
+
+	* configure.in: outdated comment
+
+	* config, src, src/cli, src/common, src/common/Makefile.am,
+	  src/common/includes: ignores and such
+
+	* AboutBoxController.h, AboutBoxController.m, ConversionList.h,
+	  ConversionList.m, ErrorController.h, ErrorController.m,
+	  HistoryList.h, HistoryList.m, InspectorController.h,
+	  InspectorController.m, Makefile.am, MyTextField.h, MyTextField.m,
+	  OldVariableList.h, OldVariableList.m, PersVarList.h,
+	  PersVarList.m, VariableList.h, VariableList.m, WcalcController.h,
+	  WcalcController.m, WcalcService.h, WcalcService.m, acinclude.m4,
+	  add_commas.c, add_commas.h, autogen.sh, calculator.c,
+	  calculator.h, config, config/readline.m4, configure.in,
+	  conversion.c, conversion.h, definitions.h, evalvar.c, evalvar.h,
+	  explain.c, explain.h, extract_vars.c, extract_vars.h, files.c,
+	  files.h, help.c, help.h, historyManager.c, historyManager.h,
+	  iscmd.c, iscmd.h, isconst.c, isconst.h, isfunc.c, isfunc.h,
+	  list.c, list.h, main.c, main.m, number.c, number.h,
+	  number_formatting.c, number_formatting.h, parser.y, scanner.l,
+	  src, src/Makefile.am, src/cli, src/cli/main.c, src/common,
+	  src/common/add_commas.c, src/common/calculator.c,
+	  src/common/conversion.c, src/common/evalvar.c,
+	  src/common/explain.c, src/common/extract_vars.c,
+	  src/common/files.c, src/common/help.c,
+	  src/common/historyManager.c, src/common/includes,
+	  src/common/includes/Makefile.am,
+	  src/common/includes/add_commas.h,
+	  src/common/includes/calculator.h,
+	  src/common/includes/conversion.h,
+	  src/common/includes/definitions.h, src/common/includes/evalvar.h,
+	  src/common/includes/explain.h,
+	  src/common/includes/extract_vars.h, src/common/includes/files.h,
+	  src/common/includes/help.h, src/common/includes/historyManager.h,
+	  src/common/includes/iscmd.h, src/common/includes/isconst.h,
+	  src/common/includes/isfunc.h, src/common/includes/list.h,
+	  src/common/includes/number.h,
+	  src/common/includes/number_formatting.h,
+	  src/common/includes/string_manip.h,
+	  src/common/includes/uint32_max.h,
+	  src/common/includes/variables.h, src/common/iscmd.c,
+	  src/common/isconst.c, src/common/isfunc.c, src/common/list.c,
+	  src/common/number.c, src/common/number_formatting.c,
+	  src/common/parser.y, src/common/scanner.l,
+	  src/common/string_manip.c, src/common/variables.c, src/gui,
+	  src/gui/AboutBoxController.m, src/gui/ConversionList.m,
+	  src/gui/ErrorController.m, src/gui/HistoryList.m,
+	  src/gui/InspectorController.m, src/gui/MyTextField.m,
+	  src/gui/OldVariableList.m, src/gui/PersVarList.m,
+	  src/gui/VariableList.m, src/gui/WcalcController.m,
+	  src/gui/WcalcService.m, src/gui/includes,
+	  src/gui/includes/AboutBoxController.h,
+	  src/gui/includes/ConversionList.h,
+	  src/gui/includes/ErrorController.h,
+	  src/gui/includes/HistoryList.h,
+	  src/gui/includes/InspectorController.h,
+	  src/gui/includes/MyTextField.h,
+	  src/gui/includes/OldVariableList.h,
+	  src/gui/includes/PersVarList.h, src/gui/includes/VariableList.h,
+	  src/gui/includes/WcalcController.h,
+	  src/gui/includes/WcalcService.h, src/gui/includes/theDelegate.h,
+	  src/gui/main.m, src/gui/theDelegate.m, string_manip.c,
+	  string_manip.h, theDelegate.h, theDelegate.m, uint32_max.h,
+	  variables.c, variables.h: modernize the layout
+
+2013-02-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y: fix handling of the \bits command
+
+2012-09-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: Josue's patch to fix Debian bug 600255
+
+2012-09-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: update for gtgroff
+
+2012-08-22  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c: patch from Josué Ortega
+
+2012-07-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: fix history filename issue
+
+2012-06-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: Excised leftover PATH_MAX uses.
+
+2012-06-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* files.h: prototype openDotFile()
+
+	* files.c, files.h, main.c: update to use PATH_MAX only if
+	  available
+
+	* configure.in: check for PATH_MAX (some OSs, like GNU Hurd, do not
+	  have it)
+
+2012-04-04  Kyle Wheeler <kbwheel@gmail.com>
+
+	* configure.in: avoid taking sides on rpath debate
+
+	* configure.in: since AC_SEARCH_LIBS and AC_CHECK_LIB build up
+	  LIBS, we need to leave the CPPFLAGS and LDFLAGS modified
+
+	* configure.in: mpfr requires gmp, so use gmp flags when detecting
+	  mpfr
+
+	* number_formatting.c: minimum of 2 digits from mpfr_get_str, also,
+	  always reserve space for the null-termination
+
+	* Makefile.am, configure.in: allow for specifying GMP and MPFR
+	  paths
+
+	* main.c: improve handling of -P argument
+
+2012-03-14  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c, iscmd.c: online help for \delim
+
+2012-03-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* help.c, main.c: get the version string right
+
+	* scanner.l: scientific notation can have a zero exponent
+
+2011-04-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* number_formatting.c: comment about upping the cutoff
+
+	* number_formatting.c: up the cutoff
+
+	* number_formatting.c: make it possible to display small things
+	  like Eh
+
+	* conversion.c: fix yard conversion to meters (and thus, to
+	  everything else)
+
+2010-12-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* configure.in, help.c, main.c: update to new autotools & version
+	  number
+
+	* ., calculator.c, number_formatting.c: better way to respect
+	  print_ints... still seem to have a problem with really really
+	  huge decimals, such as 100!+0.1
+
+	* number_formatting.c: not always respecting print_ints setting
+
+2010-06-07  Kyle Wheeler <kbwheel@gmail.com>
+
+	* number_formatting.c: better handling of very big/small numbers
+	  when doing automatic engineering decisions
+
+	* main.c: initialize rounding indication and add error reporting
+	  for unrecognized config values
+
+	* number_formatting.c: required to get the right exponent (why???);
+	  test against muB
+
+	* number_formatting.c: required to get the right exponent (why???);
+	  test against muB
+
+	* number_formatting.c: correct the display of long exponents
+
+	* ., English.lproj: ignores
+
+	* historyManager.c: not sure what this is for...
+
+	* WcalcController.m: fix handling of alternate input prefs - they
+	  were not saved to the preferences correctly
+
+	* number_formatting.c: use indexes rather than pointers, and be
+	  more careful about running off the end of "length", to avoid a
+	  segfault; initialize d_index; fix exponent calculation for
+	  0-precision display
+
+	* main.c: avoid unexpected behavior if HOME is too long
+
+	* calculator.c: print_equal should turn off the tilde too; and
+	  remove attribution URL (points to a porn site now)
+
+	* test.simple: test for radian correctness
+
+	* help.c: fix typo (thanks Reuben Thomas!)
+
+	* parser.y: fix potential printf issue
+
+	* scanner.l: attempting to handle missing lex/flex more gracefully;
+	  avoid segfaults by initializing the return value, even though it
+	  wont be used; not all versions of lex support curly-brace
+	  repetition definitions <sigh>
+
+	* configure.in: attempting to handle missing lex/flex more
+	  gracefully; and without yywrap, we dont need to link to libl
+
+	* files.c: avoid unexpected behavior if HOME is too long, and use
+	  O_EXCL on saveState to avoid unintentional overwrites
+
+	* wcalc.1: avoid the word "precision" when possible, because it,
+	  itself, is imprecise. And also try to be more clear (thanks
+	  Reuben Thomas!)
+
+	* calculator.c: some more debug output
+
+2010-05-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* autogen.sh: this is really trivial, but... avoids confusion
+
+2008-10-31  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj:
+	  reworked Xcode build settings (consider: different settings for
+	  Wcalc.app and wcalc, but most of the settings are pulled from the
+	  project settings)
+
+	* NewWcalc.icns, Wcalc.xcodeproj/kyle.pbxuser: Adding new icon (via
+	  Xcode svn frontend)
+
+	* wcalc.spec: Testing...
+
+	* Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj:
+	  xcode 3.1 only
+
+	* ChangeLog, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: tidying
+
+2008-10-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.pmdoc/01wcalc.xml, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, historyManager.c: fixing
+	  compilation in xcode
+
+	* ChangeLog, English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, NEWS, README,
+	  Wcalc-nonFHS.pmproj, Wcalc.pmdoc,
+	  Wcalc.pmdoc/01wcalc-contents.xml, Wcalc.pmdoc/01wcalc.xml,
+	  Wcalc.pmdoc/index.xml, Wcalc.pmproj, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj:
+	  collective version bump
+
+	* wcalc.1: documenting the new options for input
+
+	* test.simple: test for crashers and correct binary ops
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, calculator.c,
+	  calculator.h, main.c, parser.y, scanner.l, simpleCalc.c:
+	  alternate input decimal and thousand separators... this is to
+	  handle the pathological case where input needs to be from one
+	  nationality and output needs to be in another
+
+	* Info.plist, definitions.h, help.c: simpler versioning cooperation
+	  with Xcode
+
+	* AboutBoxController.m: depend on definitions.h
+
+	* WcalcController.h, WcalcController.m: alternate input decimal and
+	  thousand separators... this is to handle the pathological case
+	  where input needs to be from one nationality and output needs to
+	  be in another; also fixed display size adjusting
+
+2008-10-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: use 10.4+ method of fetching thousands
+	  separator and dec separator
+
+	* number.h: make binary operations (bor, band, bxor) use a less
+	  surprising rounding mode when operating on non-integers
+
+	* number.c: make is_int simpler and stop relying on string
+	  manipulation
+
+	* calculator.c: truncate right-shifts only if we were working with
+	  an integer to begin with
+
+	* number_formatting.c: fix typo
+
+	* add_commas.c: behave correctly if separator is nil
+
+2008-10-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ., .cvsignore: remove generated files from .cvsignore
+
+	* English.lproj/.DS_Store: DS_Store
+
+	* calculator.c: simplifying previous rshift solution with trunc
+
+	* aclocal.m4, config.h.in, configure, ylwrap: removing generated
+	  files from cvs
+
+	* ., .cvsignore, English.lproj, English.lproj/.cvsignore: tidying
+
+	* number.c, number.h: less complicated solution to the problem:
+	  just use trunccalculator.c
+
+	* English.lproj/Makefile.am, Makefile.am, Makefile.in,
+	  configure.in, ylwrap: better build system
+
+2008-10-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: use num_rshift instead of hand work, because we
+	  need the numbers to be truncated correctly
+
+	* number.c, number.h: num_rshift to truncate bits correctly
+
+	* number_formatting.c: avoid a stupid segfault
+
+2008-08-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c, isconst.c: minor fix, and added a warning to remind
+	  myself of an idea
+
+	* explain.c: revamped isconst makes it easier to handle this
+	  symbolically, and allows the compiler to notice missing
+	  explanations... added a few missing explanations
+
+	* extract_vars.c, scanner.l: deal with new isconst correctly
+
+	* isconst.c, isconst.h, main.c: fix the engineering flag (oops) and
+	  expand the power of isconst()
+
+2008-06-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: localizing the output was getting skipped in some
+	  circumstances
+
+2008-05-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* list.h: declaring inline in a header file is pointless, and with
+	  SunStudio's compiler, harmful
+
+	* configure.in: remove solaris bodge (have generic isinf/isnan
+	  workaround), but add AC_C_INLINE
+
+	* calculator.c: isinf/isnan nonexistence fixes
+
+2008-03-31  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am: enable "make dist"
+
+	* main.c: pref reading shouldn't require a space between the key
+	  and the equals sign
+
+2008-02-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c, scanner.l: add tab-completion of new engineering modes
+
+	* explain.c: make explanations of commands tolerant of missing
+	  backslash
+
+2008-02-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, NEWS, README, Wcalc-nonFHS.pmproj, Wcalc.pmproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, aclocal.m4, configure: 2.3.1
+
+	* acinclude.m4: better readline history detection
+
+	* number_formatting.c: fix a compiler warning
+
+	* WcalcController.h, WcalcController.m: straightening out the eng
+	  pref
+
+2008-02-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: fixed the backwards compatability logic
+
+2008-02-08  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c, wcalc.1: accept input from wcalc_input envariable
+
+	* wcalc.1: correct engineering mode documentation
+
+	* number_formatting.c: make engineering output truncate results if
+	  the precision is auto
+
+	* main.c, parser.y, scanner.l, wcalc.1: make the engineering
+	  configuration consistent (and DOCUMENTED)
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, WcalcController.h,
+	  WcalcController.m, calculator.c, calculator.h, main.c,
+	  number_formatting.c, number_formatting.h, parser.y: Make
+	  engineering mode a three-way toggle between "always", "never",
+	  and "auto"
+
+	* conversion.h: ssize_t headers
+
+2008-02-04  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: be more careful about running off the end of yytext
+
+	* README: stupid typo
+
+2007-12-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: accept @NaN@ and @Inf@
+
+	* number.h: inf
+
+2007-08-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* number.c, number.h: vastly expanded non-mpfr functions... dont
+	  quite work right yet, but its almost there
+
+	* number_formatting.c, number_formatting.h: another stab at
+	  mpfr-independence
+
+	* string_manip.c: making splint happy
+
+	* list.c, list.h, main.c: attempting to make splint happy
+
+	* explain.c, extract_vars.c, extract_vars.h, iscmd.c, isconst.c,
+	  isconst.h, isfunc.c: make splint happy
+
+	* files.c, help.c: remove pointless mpfr dependency
+
+	* conversion.c, conversion.h: use ssize_t instead of smaller ints
+
+	* calculator.h: fix signs and remove gratuitous randstate
+
+	* add_commas.c, add_commas.h: correct conversions and handle out of
+	  memory, add splint notation
+
+2007-08-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog: *** empty log message ***
+
+	* English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  WcalcController.m: comp, fact, exp, and sinc were missing from
+	  the GUI
+
+	* explain.c: sinc and exp were missing documentation
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist,
+	  Makefile.in, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj,
+	  aclocal.m4, configure, configure.in, definitions.h: version bump
+	  to 2.3.1, and some minor changes to make compiling easier
+
+2007-08-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.h, WcalcController.m: make prefs behave
+	  themselves (sync on quit and on closing the prefs window) and
+	  restore the maxPrecisionValue from the saved pref on awakeFromNib
+
+	* MyTextField.m: handle maliciousness and weirdness a bit better.
+	  delete and backspace are now synonyms for CLEAR
+
+	* simpleCalc.c: handle input number formatting properly (commas,
+	  periods, internationalization, etc.)
+
+2007-08-22  Kyle Wheeler <kbwheel@gmail.com>
+
+	* test.simple: correct the test for FORTRAN-style **
+
+	* MyTextField.m, WcalcController.m, simpleCalc.c, simpleCalc.h:
+	  major overhaul of the simpleCalc subsystem, to make it more
+	  robust. still needs work to handle quasi-malicious users, but it
+	  already works better than it used to (no crashing!)
+
+	* WcalcController.m: correct interface glitch when resizing windows
+	  that have already been resized
+
+	* WcalcController.m: correct interface glitch when setting bit
+	  precision
+
+	* WcalcController.m: removed debugging printouts
+
+	* scanner.l: converting ** back into FORTRAN-style exponent
+	  notation
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, WcalcController.h,
+	  WcalcController.m: Fix display when going back from extreme
+	  sizes. Also, added slider-max preference
+
+2007-08-14  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y, test.simple: fix squaring syntax errors (e.g. 2**3 =
+	  12)
+
+2007-08-03  Kyle Wheeler <kbwheel@gmail.com>
+
+	* README, wcalc.1: update for GPLv2+ compatability
+
+	* COPYRIGHT: update for GPLv2+ compatability
+
+2007-07-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, NEWS, README: version 2.3 commit
+
+	* Wcalc-nonFHS.pmproj, Wcalc.pmproj, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser: *** empty log message ***
+
+	* Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: *** empty log message ***
+
+	* parser.y: removed compiler warning
+
+	* number_formatting.c: whitespace changes and some signedness
+	  tidiness
+
+	* number.h: might not be necessary, but added mp_prec_t
+
+	* number.c: fixed a compiler warning about signedness
+
+	* historyManager.c, historyManager.h: why go unsigned long when you
+	  can go size_t?
+
+	* conversion.c, files.c: fixed a signed/unsigned issue
+
+	* extract_vars.c: minor cleanup for readability (str -> peekstr)
+
+	* explain.c: minor cleanup for readability (str -> curstr)
+
+2007-07-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: use the strswap function instead of duplicating
+	  code
+
+	* WcalcController.m: removed symbol conflict (exp -> expr), and
+	  removed signed/unsigned comparisons
+
+	* HistoryList.m, VariableList.m: removed symbol conflict (index ->
+	  theIndex)
+
+	* MyTextField.m, PersVarList.m: removed symbol conflict (exp ->
+	  expr)
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist,
+	  WcalcService.h, WcalcService.m, main.m: WcalcService
+
+	* WcalcController.h, WcalcController.m: change the menu display
+	  when the keyboard appears and disappears
+
+2007-07-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, calculator.h, conversion.c, conversion.h,
+	  evalvar.c, evalvar.h, explain.c, explain.h, files.c, files.h,
+	  iscmd.c, iscmd.h, isconst.c, isconst.h, isfunc.c, isfunc.h,
+	  number.c, number.h, variables.c, variables.h: made the inputs
+	  const
+
+	* main.c: added --dec, --hex, --bin, and --oct, because I keep
+	  trying to use them anyway
+
+	* add_commas.c, add_commas.h, string_manip.c, string_manip.h: made
+	  the inputs const, and switched to using offsets rather than
+	  pointer arithmetic
+
+	* number_formatting.c: testing against both 0 and length because
+	  length is unsigned
+
+	* test.simple: 100! now has an answer too
+
+	* number_formatting.c: avoid using pointers when possible in
+	  zero_strip, for tighter code
+
+	* number.c: made is_int() more reliable in the face of excess
+	  precision (e.g. 100!)
+
+	* main.c: increased buffer sizes and removed overflow in config
+	  file
+
+	* scanner.l: allow initial zero on exponent in hex
+
+	* scanner.l: allow initial zero on exponent in big ugly
+
+	* test.simple: add test for variable expansion precision bug
+
+	* calculator.c: use full-precision for estimating simple rounding
+	  (more likely to warn of rounding in all relevant cases)
+
+	* number_formatting.c: fix variable expansion by adding a
+	  full-precision formatter
+
+	* calculator.c: comment documenting last change
+
+	* calculator.c: request a full-precision number
+
+2007-07-16  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: misc minor tweaks
+
+	* conversion.c: correcting and expanding, refactoring unit list,
+	  added pressure and angle.
+
+	* conversion.h: correcting and expanding unit list, added pressure
+	  and angle.
+
+	* InspectorController.m: whitespace
+
+	* ConversionList.m: angle and pressure
+
+	* WcalcController.m: fixed the inspector-window-quits-program bug
+
+	* scanner.l: minor cleanup
+
+	* number_formatting.c: remove a debug warning
+
+	* main.m: fewer dependencies
+
+2007-07-11  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, explain.c, main.c, number.c, number.h, scanner.l:
+	  fixing a few warnings
+
+	* WcalcController.m, scanner.l: the bohr radius notation is a0, not
+	  ao
+
+	* calculator.c: pad "output_string" output with spaces to make
+	  formatting of prefs listing more predictable
+
+	* wcalc.1: missing a few commands
+
+	* definitions.h: fixing the units on the bohr radius
+
+	* parser.y: improved formatting of prefs listing
+
+	* parser.y: moved number.h include, made prefs listing more useful
+
+2007-07-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* number_formatting.c: fixed the assumption that the output of
+	  mpfr_get_string is greater than exp
+
+	* number.c: strlen() include
+
+	* number.c: fixed some really sloppy code (avoiding a buffer
+	  overrun)
+
+2007-04-06  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c, isconst.c, wcalc.1: bohr
+
+2007-04-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* conversion.c: more kph synonyms
+
+2007-02-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am, Makefile.in, MyTextField.h, VariableList.m,
+	  WcalcController.m, calculator.c, conversion.c, conversion.h,
+	  evalvar.c, historyManager.c, historyManager.h, isfunc.c, main.c,
+	  number.c, number.h, parser.y, scanner.l, simpleCalc.c,
+	  variables.c, variables.h: abstracted mpfr out... mostly
+
+2007-02-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c, parser.y, variables.c, variables.h: efficiency on
+	  listvars, and varname completion
+
+	* explain.c: fix explain to handle whitespace
+
+	* parser.y: removed error-verbose because its now unnecessary
+
+2007-01-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: completion-speed
+
+2007-01-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, configure, configure.in,
+	  definitions.h, parser.y, scanner.l: fix a bug introduced with the
+	  better error reporting, and tidy up a little in scanner.l
+
+	* calculator.c, calculator.h, main.c, parser.y, scanner.l: better
+	  error reporting
+
+2006-12-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: fixed error reporting on malformed numbers
+
+	* parser.y: verbose errors (kinda cool)
+
+	* main.c: formatting
+
+2006-12-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: minor tidying, added "to" to the conversion completion
+
+	* main.c: quietly conform a little more closely to command-line
+	  syntax in the rc file
+
+	* isconst.c, isfunc.c: optimized (this stuff is const)
+
+	* NEWS, main.c: TAB COMPLETION!!!
+
+	* explain.c: be more helpful when called alone
+
+	* Makefile.am, Makefile.in, conversion.c, conversion.h, iscmd.c,
+	  iscmd.h: preparing for tab-completion
+
+	* scanner.l: more forgiving about whitespace
+
+2006-09-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am: no gcc-specific flags
+
+2006-08-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y: better error messages
+
+	* scanner.l: more tolerant (and convenient) parsing for commands
+	  that take digits as arguments
+
+2006-07-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* list.c: fixed a problem removing things from the List
+	  datastructure
+
+2006-07-11  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: observe only the main window with the quit:
+	  selector, not ALL windows (Marco Thill)
+
+2006-07-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog: *** empty log message ***
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, README,
+	  Wcalc-nonFHS.pmproj, Wcalc.pmproj, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser: just a touch
+
+	* WcalcController.m: more memory tidying
+
+	* WcalcController.m: declaring the mutex
+
+	* ConversionList.m, ErrorController.m, HistoryList.m,
+	  InspectorController.m, MyTextField.m, OldVariableList.m,
+	  PersVarList.m, VariableList.m, add_commas.c, conversion.c,
+	  evalvar.c, explain.c, extract_vars.c, historyManager.c,
+	  isconst.c, isfunc.c, list.c, main.m, memwatch.c, memwatch.h,
+	  parser.y, scanner.l, simpleCalc.c, string_manip.c, theDelegate.m,
+	  variables.c: MEMWATCH
+
+	* WcalcController.h: added quit function
+
+	* WcalcController.m: memory cleanup, mutex-protecting the
+	  change-precision slider, MEMWATCH
+
+	* calculator.c: memory cleanup, MEMWATCH
+
+	* explain.c: explain cmod
+
+	* files.c, main.c: memory cleanup, MEMWATCH
+
+	* number_formatting.c, number_formatting.h: some consts, MEMWATCH
+
+	* test.simple: 0.9e-9 test cases
+
+	* help.c: better details
+
+	* AboutBoxController.m: MEMWATCH
+
+	* English.lproj/InfoPlist.strings, Info.plist, README,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: version, prerelease commit 2.2.2
+
+	* ChangeLog: *** empty log message ***
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, test.simple: *** empty log
+	  message ***
+
+	* configure, configure.in, definitions.h: new version
+
+	* wcalc.1: added c_style_mod pref keyword
+
+	* parser.y, scanner.l: added \cmod command
+
+	* main.c: added live precision toggle, % style prefs, and the
+	  c_style_mod pref keyword
+
+	* number_formatting.c: eliminate the negative zeros
+
+	* calculator.c, calculator.h: added live precision toggle, % style
+	  prefs
+
+	* WcalcController.h, WcalcController.m: added live precision
+	  toggle, % style prefs, improved the prefs versioning, and fixed
+	  some whitespace
+
+2006-07-09  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am, Makefile.in: dont need optimization by default
+
+2006-04-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* acinclude.m4, aclocal.m4, configure: better history detection
+
+2006-04-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y: this was backwards
+
+	* calculator.c: probably faster
+
+2006-03-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: make mod (%) efficient
+
+2006-03-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: fixes the 0.9e-9 bug, and enables exponents and
+	  decimals and such on the other bases
+
+	* add_commas.c: fixes the exponent brokenness
+
+	* string_manip.c: now handles of hex exponents
+
+2006-03-03  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: no printing, and
+	  standardize the appearance of some windows
+
+2006-03-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: keyboard is now a one-click affair
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: Preloaded Variables
+	  buttons, renamed the menu item, added more auto-save names
+
+2006-03-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, HistoryList.h,
+	  HistoryList.m, VariableList.h, VariableList.m,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser: can
+	  copy from history/variable list.
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  InspectorController.h, InspectorController.m,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser:
+	  Inspector is now a panel
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist, NEWS,
+	  README, Wcalc-nonFHS.pmproj, Wcalc.pmproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  configure: post-release commit
+
+	* Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, configure.in, definitions.h:
+	  incrementing version
+
+	* ChangeLog: *** empty log message ***
+
+	* PersVarList.m, list.c: fix crash when theres an empty list
+
+	* ChangeLog: post-release commit
+
+	* README, Wcalc-nonFHS.pmproj, Wcalc.pmproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser:
+	  Releasing 2.2
+
+	* wcalc.1: sinc
+
+	* parser.y: sinc
+
+	* calculator.c, calculator.h, definitions.h, explain.c, isfunc.c,
+	  parser.y, scanner.l: sinc
+
+	* explain.c: explanations of Gamma, lnGamma, zeta, and K
+
+	* explain.c: added a \n
+
+2006-02-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* definitions.h, isconst.c, isfunc.c, wcalc.1: new symbols
+
+	* ChangeLog: *** empty log message ***
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser: Preload
+	  Variables
+
+	* string_manip.c: avoiding string functions
+
+	* list.c: correct getListElement
+
+	* WcalcController.m: preload the preloaded variables
+
+	* VariableList.m: unused variable
+
+	* PersVarList.m: all the rest of the implementation
+
+	* calculator.c: rely on count_digits to do it right
+
+	* number_formatting.c: better truncation decisions
+
+	* scanner.l: more accurate sig-fig calculation
+
+	* string_manip.c: make count_digits aware of base (I think)
+
+2006-02-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, HistoryList.m,
+	  InspectorController.h, InspectorController.m, PersVarList.h,
+	  PersVarList.m, README, VariableList.m, Wcalc.pmproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, WcalcController.h,
+	  WcalcController.m, w.png: added the new functions, and a way to
+	  change the internal bitcount. partially through the preload stuff
+
+	* calculator.c: rounding needs more work
+
+	* variables.c: getrealnvar was totally broken
+
+	* scanner.l: forgiving capitalization of lnGamma
+
+	* list.c: getListElement was broken... dunno about this aliasing
+	  stuff
+
+	* evalvar.c, parser.y: num_to_str changed
+
+	* add_commas.c: debug printf twiddle
+
+	* number_formatting.c, number_formatting.h: some truncation hinting
+
+2006-02-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.in, aclocal.m4, config.h.in, configure: osx utils
+
+	* calculator.c, configure.in: better uj detect (use mpfr!)
+
+	* calculator.c: uj
+
+	* config.h.in, configure: new version
+
+	* configure.in: stupid library
+
+	* configure.in: GMPs broken MPFR library really irritates me
+	  sometimes
+
+2006-02-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: wbnot was missing
+
+2006-02-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.in, aclocal.m4, configure: OSX tools
+
+	* historyManager.c: unnecessary function
+
+	* acinclude.m4: new URL
+
+	* configure.in: that extra dollar sign was making OpenBSD confused
+
+	* configure: new configure.in
+
+	* configure: new configure.in
+
+	* parser.y: typo
+
+	* conversion.c, conversion.h: plurals and non-plurals
+
+	* scanner.l: some units have periods
+
+2006-02-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* conversion.c: more accurate foot-inches conversion
+
+	* list.c, list.h: unused-but-possibly-useful-someday function
+
+	* parser.y: whitespace
+
+	* parser.y: shift/reduce errors and more explanation of memory leak
+	  in error condition
+
+2006-02-15  Kyle Wheeler <kbwheel@gmail.com>
+
+	* configure.in: better error message, more accurate requirements
+	  (for the moment)
+
+	* Makefile.in, aclocal.m4, config.h.in, configure: MacOS X 10.4.5
+
+	* calculator.c, scanner.l: work with older mpfr versions
+
+	* definitions.h: catalan constant if its missing from mpfr
+
+	* configure.in: detect a missing mpfr_sec function
+
+	* WcalcController.h, add_commas.c, calculator.c, calculator.h,
+	  conversion.h, evalvar.c, explain.c, extract_vars.c,
+	  historyManager.c, isconst.c, isfunc.c, list.c, main.c,
+	  simpleCalc.c, string_manip.c, variables.c, variables.h:
+	  whitespace
+
+	* definitions.h: K (Catalan)
+
+	* files.c: whitespace
+
+	* parser.y: comment explaining memory loss
+
+	* main.c: print errors in commandline
+
+	* calculator.c: memory leak in error condition
+
+	* conversion.c, parser.y: memory leak
+
+	* scanner.l: Gamma function rather than gamma to distinguish it
+	  from the Euler constant
+
+	* add_commas.c: fix memory overrun
+
+	* list.c: allocate the right thing
+
+	* extract_vars.c: strdup it so it can be safely freed
+
+	* main.c: just fixing an exit memory allocation (doesnt *really*
+	  matter)
+
+	* calculator.c: memory leak
+
+	* variables.c: memory leak (description)
+
+	* extract_vars.c: memory leak
+
+	* number_formatting.c: possible memory overwrite
+
+	* calculator.c, calculator.h, parser.y, scanner.l: secant, cosecant
+	  (and related functions), gamma, lngamma, zeta, catalan (K) and
+	  enhanced euler
+
+	* number_formatting.c: correct calloc syntax (does this matter?)
+
+	* add_commas.c: only numbers
+
+2006-02-14  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: make the equal always in the second column
+
+	* add_commas.c: negatives
+
+	* calculator.c: a warning against bad thoughts
+
+	* parser.y: add_commas pref
+
+	* add_commas.c: debugging
+
+	* wcalc.1: descriptions of wcalcrc keys
+
+	* calculator.c: add commas for regular numbers too
+
+2006-02-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: potato potah-toe
+
+	* main.c: cmdline input fix for systems without READLINE_HISTORY
+
+	* calculator.c, calculator.h: add commas
+
+	* main.c: whitespace and delimiters preference
+
+	* scanner.l: \delimiters
+
+	* parser.y: DELIM_CMD
+
+	* number_formatting.h: whitespace
+
+	* number_formatting.c: commas
+
+	* WcalcController.m: commas preference preliminary
+
+	* Makefile.am, Makefile.in, add_commas.c, add_commas.h: add_commas
+
+	* test.simple: trickier precision guard test
+
+	* number_formatting.c, scanner.l: main.c
+
+	* calculator.c: spacing and fiddled with print_this_result
+
+2006-02-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* VariableList.m: compatability with new variables.c
+
+2006-01-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c: better error message
+
+	* test.simple: might be important to test
+
+	* parser.y: added print_ints pref to \\prefs
+
+	* main.c: corrected print_integers preference, added error-checking
+	  to internal variable storage
+
+	* variables.c: wrong semantics on key sanity testing
+
+2006-01-15  Kyle Wheeler <kbwheel@gmail.com>
+
+	* variables.h: size_t instead of int
+
+	* variables.c: made it use the generic List structure
+
+	* parser.y: better variable abstraction, a readability fix, and
+	  slightly more useful error messages
+
+	* list.h: added getListElement
+
+	* list.c: removed unnecessary error printout, and added
+	  getListElement
+
+	* files.c: readability
+
+2005-12-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: tidying up, reorganizing
+
+	* wcalc.1: variables & descriptions
+
+2005-12-11  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/InfoPlist.strings, Info.plist, OldVariableList.h,
+	  VariableList.m, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj,
+	  WcalcController.m, calculator.c, calculator.h, configure,
+	  configure.in, conversion.c, conversion.h, definitions.h,
+	  evalvar.c, explain.c, extract_vars.c, files.c, help.c, help.h,
+	  historyManager.c, historyManager.h, list.c, list.h, main.c,
+	  parser.y, simpleCalc.c, string_manip.c, string_manip.h,
+	  variables.c, variables.h: tidying up, incrementing version
+
+	* calculator.c, explain.c, uint32_max.h: UINT32_MAX is *not* that
+	  hard, people!
+
+	* files.c: save the description, bugfix for saveState
+
+2005-12-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* explain.c: portability fixes
+
+	* variables.h: include config.h
+
+	* explain.c, files.c, help.c, main.c, parser.y, scanner.l,
+	  variables.c, variables.h: descriptions
+
+	* wcalc.1: \\store and \\explain
+
+	* explain.c, files.c: \\explain \\store
+
+	* files.c, files.h, main.c, parser.y, scanner.l: \\store function,
+	  and useability fixes in files.c for the preload file
+
+	* calculator.c: formatting
+
+	* calculator.c: folds
+
+	* calculator.c: depth-first recursion search, not breadth-first
+
+	* calculator.c: that was unnecessary
+
+	* calculator.c: find_recursion uses all List's now
+
+	* test.errors: more tests
+
+	* list.c, list.h: added an iterator structure and a way to use the
+	  list as a stack rather than a queue
+
+	* calculator.c: removed local_extract_vars in favor of the
+	  separated one in extract_vars.c
+
+	* calculator.c: fixing the a==5 bug
+
+	* test.errors: more extensive testing
+
+	* calculator.c: starting to eliminate non-List lists
+
+	* Makefile.am, Makefile.in, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, configure, evalvar.c, evalvar.h,
+	  explain.c, explain.h, extract_vars.c, extract_vars.h, help.c,
+	  isconst.c, isconst.h, isfunc.c, isfunc.h, list.c, list.h, main.c,
+	  parser.y, scanner.l, variables.h: \\explain
+
+	* calculator.c: this was extraneous
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: missing connection
+	  repaired
+
+2005-12-07  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: that var was unecessary
+
+	* main.c: command-line operations now add to the history
+
+	* wcalc.1: wcalcrc and active variable documentation
+
+2005-12-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* configure.in: typo
+
+2005-12-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist,
+	  InspectorController.h, InspectorController.m, NEWS, README,
+	  Wcalc.pmproj, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj,
+	  WcalcController.h, WcalcController.m, definitions.h, wcalc.info:
+	  fixed resizeness, made Inspector a window, releasing 2.1.2
+
+	* ChangeLog: Version 2.1.2
+
+	* Makefile.am: Reference for if I need lexx flags in the future
+
+	* configure, configure.in: Version 2.1.2
+
+	* Makefile.in: backup file garbage
+
+2005-11-14  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am: remove more cvs cruft
+
+2005-11-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: the menu functions
+	  now say areasinh instead of arcsinh
+
+2005-11-09  Kyle Wheeler <kbwheel@gmail.com>
+
+	* files.c: makes OpenBSD happy
+
+2005-11-08  Kyle Wheeler <kbwheel@gmail.com>
+
+	* files.c: variables as expressions should be quoted correctly
+
+2005-11-07  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser:
+	  whatever
+
+	* Makefile.in, aclocal.m4, configure, configure.in: attempt to
+	  detect broken MPFR installations
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: Forgot to connect
+	  the drawers to the corrected main window :(
+
+	* scanner.l: technically, that should be a "mu" and not a "micro",
+	  but you can't tell visually... for the time being, we accept
+	  either one
+
+	* WcalcController.m: technically, that should be a "mu" and not a
+	  "micro", but you can't tell visually - also, use a real multiply
+	  symbol for implicit here
+
+	* README, definitions.h: I wanted mu, not micro... but that's
+	  complicated
+
+	* ChangeLog, NEWS, README, README.txt, Wcalc.pmproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: 2.1.1
+
+2005-11-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: improve utf-8 friendliness, add debug
+	  printouts in loading sequence, fix compatability with locales
+	  without NSThousandsSeparators, fix repeat calculation bug
+
+	* scanner.l: correct name for the asinh,acosh,atanh,acoth functions
+
+	* ReadMe.rtf: text only now
+
+	* English.lproj/InfoPlist.strings: binary-fied
+
+	* English.lproj/InfoPlist.strings: step 1 in binary-fying it
+
+	* simpleCalc.c: fixed debug output
+
+	* scanner.l: fixed the division symbol and made it so the
+	  error-reporter won't break the GUI by printing malformed UTF-8
+
+	* definitions.h: preparing for 2.1.1
+
+	* OldVariableList.m, VariableList.m: made utf-8 friendly
+
+	* ConversionList.m, HistoryList.m, MyTextField.m: made utf-8
+	  friendly
+
+	* Info.plist: preparing for 2.1.1
+
+	* ErrorController.m: minor obvious optimizations (what was I
+	  thinking?)
+
+	* English.lproj/MainMenu.nib/keyedobjects.nib: presto: binary
+
+	* English.lproj/MainMenu.nib/keyedobjects.nib: step 1 to proper
+	  cvsage
+
+	* English.lproj/MainMenu.nib/info.nib: Re-add as binary
+
+	* English.lproj/MainMenu.nib/info.nib: Step 1 to making it work
+	  properly
+
+	* English.lproj/MainMenu.nib/classes.nib: Re-adding with wrapper
+
+	* English.lproj/MainMenu.nib/classes.nib: Step 1 to adding it
+	  "properly"
+
+2005-11-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* test.simple: \ints tests
+
+	* calculator.c: correct \ints output for small numbers (I am still
+	  a moron)
+
+	* calculator.c: correct \ints output for big numbers (I am a moron)
+
+	* variables.c: fix logic errors introduced by the openbsd strncmp
+	  fixes: now variables where one is a prefix of the other will not
+	  be confused
+
+	* test.errors, test.recursion, test.simple, test.vars: comments
+	  that say what you should expect
+
+	* calculator.c: small optimization and remove a debug printout
+
+	* calculator.c: fix possible double-free plus some casting warnings
+
+	* simpleCalc.c: warning removal through casting
+
+	* English.lproj/InfoPlist.strings, Info.plist, Makefile.in, NEWS,
+	  README.txt, Wcalc.pmproj, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, configure, configure.in,
+	  wcalc.info, wcalc.spec: post-version 2.1-release commit
+
+	* ChangeLog: cvs2cl
+
+	* Makefile.in: changed with Makefile.am
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: little tweak - added
+	  a symbol
+
+	* Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: many compilation fixes and
+	  organizational improvements
+
+	* wcalc.info: fink needs to get its act together wrt gmp and mpfr
+
+	* wcalc.1: gamma is more accurate
+
+	* scanner.l: make utf-8 savvy (mostly)
+
+	* parser.y: remove sarcasm
+
+	* definitions.h: added Phi0 (magnetic flux quantum) and made gamma
+	  more accurate
+
+	* WcalcController.m: comply with ObjC charset restrictions, and add
+	  a symbol
+
+	* ConversionList.m: comply with ObjC charset restrictions
+
+2005-10-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* test.recursion, test.vars: more tests
+
+	* calculator.h, files.c, main.c, parser.y, scanner.l: added verbose
+	  command
+
+	* variables.c: removed debugging printouts
+
+	* calculator.c: dprintf cleanup
+
+	* variables.c: bug in storing variables when theres only one
+	  variable fixed
+
+	* files.c: removed a length limitation
+
+	* calculator.c: cleanup and removed a nondynamic string (aka
+	  possible overflow)
+
+	* parser.y, scanner.l: the \base command
+
+	* aclocal.m4: downgraded for OSX
+
+2005-10-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: updates and corrections
+
+	* parser.y: minor readability tweaks
+
+	* Makefile.in: automake regen
+
+	* main.c: typo
+
+	* main.c: more useful command-line options
+
+	* calculator.h: pedantic compatability
+
+	* acinclude.m4: remove extra printout in readline detection
+
+	* Makefile.am: parser.h is sometimes missed in the cleaning phase
+
+2005-10-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.1: Fixed irand/fact bug - noticed by Daniele Sempione
+
+2005-09-11  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am, Makefile.in: more automake distclean cleanup
+
+	* Makefile.am: shouldnt use maintainer-clean for this purpose
+
+	* Makefile.in: removing CVS directories
+
+	* Makefile.am: now removes CVS files when I do a "make
+	  maintainer-clean"
+
+	* Makefile.am, Makefile.in, aclocal.m4, configure: newer auto*
+	  tools, and now it gets rid of the lex/yacc stuff
+
+2005-08-30  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, historyManager.c, main.c, test.vars, variables.c,
+	  variables.h: some more memory leaks, all small, most irrelevant
+
+	* calculator.c: fix longstanding memory leak. lets hope its a
+	  cross-platform solution
+
+	* calculator.c: memory leak
+
+	* ChangeLog: cvs2cl
+
+	* Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, number_formatting.c: compile
+	  warnings
+
+	* test.simple: 100!
+
+	* number_formatting.c, number_formatting.h: less namespace
+	  pollution
+
+	* Makefile.am, Makefile.in, calculator.c, number_formatting.c,
+	  number_formatting.h: fixed a crasher in large number output --
+	  better organized the number formatting stuff
+
+2005-08-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: allow for the display of REALLY long numbers
+
+	* calculator.c, files.c, main.c, parser.y, scanner.l, variables.c:
+	  OpenBSD portability fixes
+
+	* NEWS: old fix
+
+2005-08-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog: cvs2cl
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, VariableList.m,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, main.c, parser.y, variables.c:
+	  variable corrections
+
+	* calculator.c: comment spelling correction
+
+	* COPYING.txt, COPYRIGHT, NEWS, ReadMe.rtf, Wcalc.pmproj,
+	  Wcalc.pmsp, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj,
+	  test.simple: hopefully, last commit of version 2.0
+
+	* Info.plist: correct version
+
+	* calculator.c: that was stupid - I should have seen that before
+
+	* parser.y: Corrected a little precedence stuff in the parser.
+	  Managed to reduce conflicts
+	  too! :)
+
+	* Wcalc.pbproj: Death to old things
+
+	* ChangeLog: cvs2cl
+
+	* English.lproj/InfoPlist.strings, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj:
+	  new version
+
+	* Info.plist: version strings from the old Wcalc .plist
+
+	* Info.plist: Yes, THIS software
+
+	* parser.y, scanner.l, variables.c: whitespace
+
+	* main.c: initialization and whitespace
+
+	* calculator.c: initialization cannot be here
+
+	* WcalcController.m: Fixed a few crashes, fixed a toggle/toggle
+	  weirdness, and made the AnswerField
+	  automatically expand.
+
+	* WcalcController.h: minor cleanup plus the #import thing
+
+	* AboutBoxController.h, AboutBoxController.m, ConversionList.h,
+	  ConversionList.m, ErrorController.h, ErrorController.m,
+	  HistoryList.h, HistoryList.m, MyTextField.h, MyTextField.m,
+	  VariableList.h, VariableList.m, main.m, theDelegate.h,
+	  theDelegate.m: #import is deprecated now
+
+	* wcalc.info, wcalc.spec: new version
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: The usual stuff (preparing for a
+	  new release)
+
+2005-08-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj: Fixed the main window's scaling
+	  behavior. Since I moved to a text-format nib,
+	  CVS shouldn't be screwing it up again.
+
+	* ConversionList.m: silly semicolon
+
+	* ConversionList.m, English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, conversion.c, conversion.h,
+	  help.c, parser.y, scanner.l, test.errors, test.simple: Compiles
+	  and works!
+
+	* ConversionList.m, English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib, Info.plist,
+	  VariableList.m, Wcalc.xcodeproj/kyle.mode1,
+	  Wcalc.xcodeproj/kyle.pbxuser, Wcalc.xcodeproj/project.pbxproj,
+	  WcalcController.m, calculator.c, main.m, parser.y: IT COMPILES
+	  AND RUNS!
+	  For those who find themselves in a similar pickle, you have to
+	  specify WHERE
+	  the Info.plist file is in the get-info dialog box of the _native
+	  target.
+
+2005-07-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: fixed integers printing too many decimals
+
+2005-07-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: You'd think this would be a memory leak, but it
+	  isn't for some reason
+
+	* config.h.in, configure, configure.in: portability for Debian
+
+	* historyManager.c, parser.y, simpleCalc.c: cleanup
+
+	* scanner.l: cleanup (use yyleng instead of strlen())
+
+	* files.c, main.c: cleanup and trim an extra mpfr_t for efficiency
+
+	* conversion.c: just clarify things for when I go grepping
+
+	* calculator.h: some cleanup
+
+	* calculator.c: some cleanup, fixed some #includes, and fixed
+	  variable substitution
+
+2005-07-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.am, Makefile.in, conversion.c, conversion.h, main.c,
+	  parser.y, scanner.l: conversions work!
+
+	* calculator.c, calculator.h, definitions.h, parser.y, scanner.l:
+	  added xor and comp()
+
+2005-07-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: output function doesn't crash anymore, and the
+	  bitshifts work properly now
+
+	* configure, configure.in: version 2.0
+
+	* wcalc.1: it had gotten stagnant
+
+	* scanner.l: typo
+
+	* main.c: add a few more configuration options
+
+	* help.c: be more helpful
+
+	* calculator.c: Fixed a seg-fault in really long numbers.
+
+	* WcalcController.m: Fixed the menu thingy
+
+	* main.c, parser.y: fix memory leaks
+
+2005-07-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: implemented sig_fig rounding indication (huh, ended
+	  up identical to the old one) and fixed several things that were
+	  wrong with the old implementation
+
+	* scanner.l: oops, left debugging printfs in there
+
+	* main.c: increase the default accuracy? why not?
+
+	* help.c: most recent major thing
+
+	* parser.y: removed several unnecessary doubles, added the \bits
+	  command, and fixed the \prefs display to be slightly more useful
+
+	* scanner.l: fixed some sigfig problems, and several unnecessary
+	  doubles
+
+	* string_manip.c: correct formatting
+
+	* main.c: ~/.wcalcrc parsing was broken
+
+	* main.c: use libhistory properly, and finally fix the damn
+	  readline problems
+
+	* help.c: Info about the \bits command
+
+	* calculator.c: Implemented binary operations, and a few other
+	  minor tweaks. Still much cruft
+	  in the second display function.
+
+2005-07-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: fixed the constants menu, added all the mpfr
+	  stuff
+
+	* simpleCalc.c: mpfr stuff added
+
+	* definitions.h: more constants, corrected constants
+
+	* variables.c, variables.h: variable_exists test (read: efficiency)
+
+	* scanner.l: more constants, and no mpfr_inits()
+
+	* main.c: this should get initialized automatically now
+
+	* parser.y: damn mpfr_clears()
+
+	* conversion.h: the correct mpfr includes
+
+	* calculator.c: fixes to display and the random numbers, and also
+	  initialization
+
+	* MyTextField.h, VariableList.m: mpfr stuff added
+
+2005-06-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/keyedobjects.nib: We're ditching 10.2
+	  support.
+
+	* English.lproj/MainMenu.nib/objects.nib: BAM!
+
+2005-06-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, Wcalc.xcodeproj,
+	  Wcalc.xcodeproj/kyle.mode1, Wcalc.xcodeproj/kyle.pbxuser,
+	  Wcalc.xcodeproj/project.pbxproj, calculator.c, calculator.h,
+	  config.h.in, configure, configure.in, conversion.c, conversion.h,
+	  definitions.h, files.c, historyManager.c, historyManager.h,
+	  main.c, parser.y, scanner.l, variables.c, variables.h: Arbitrary
+	  Precision Compiles!
+
+	* WcalcController.m: Fixed SourceForge bug 1218205
+
+	* variables.c: Just formatting - the mpfr_t stuff will be along in
+	  a bit
+
+	* historyManager.c: Just formatting - the mpfr_t changes will be
+	  along in a moment.
+
+2004-02-13  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y: Oops, typo.
+
+	* calculator.c, calculator.h, parser.y, scanner.l: Added the exp
+	  function (exp(x) is equivalent to e^x)
+
+2004-01-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.in, Wcalc.pbproj/kyle.pbxuser, config.h.in, configure:
+	  Time for a new version
+
+	* scanner.l: On machines without HUGE_VALF, strtod returns HUGE_VAL
+
+	* configure.in: Have I mentioned how irritating Solaris is?
+
+	* Makefile.am: This is cleaner.
+
+2003-12-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, NEWS,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  config.h.in, configure, configure.in, definitions.h, wcalc.info:
+	  New version
+
+	* simpleCalc.c: Minor clear problem fixed (clearing entry shouldn't
+	  clear the operator). Also
+	  some debugging printouts.
+
+	* WcalcController.m: Fixed up preference settings disabling when
+	  SimpleCalc is enabled.
+
+	* configure, configure.in: Fixed some more configure stuff
+
+	* ., .cvsignore, Makefile.in, aclocal.m4, configure, configure.in:
+	  Reran autoscan, and updated for newer tools.
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib: All things updated.
+
+	* MyTextField.h, MyTextField.m, WcalcController.h,
+	  WcalcController.m, simpleCalc.c, simpleCalc.h: I think that
+	  should do it for simpleCalc. I'll see about concocting some tests
+	  to run it through tomorrow, then perhaps prepare for RELEASING A
+	  NEW VERSION!
+	  WOOOHOOOO!!!
+	  
+	  Ahem. Yes. This is all true.
+
+	* calculator.c: Some while loop changes, bad variable substitution
+	  fix, some abstraction
+	  (set_prettyanswer), and avoiding returning -0.0. Also a bunch of
+	  debugging
+	  printf's that will get removed by the preprocessor when not
+	  compiled for
+	  debugging.
+
+	* variables.c: A thought.
+
+	* scanner.l: Be slightly more flexible in number formatting. Accept
+	  numbers in the form:
+	  "5." (without the quotes)
+
+	* calculator.h: Made SimpleCalc a preference, and made Dprintf not
+	  throw warnings when not
+	  debugging.
+
+2003-12-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: A fix for variable expansion
+
+	* calculator.c: Slightly more informative (and standardized) math
+	  errors.
+
+	* parser.y: Minor correction
+
+	* parser.y, scanner.l: Fixed a bunch of stuff. Decreased errors,
+	  got rid of some dead weight, etc.
+	  Trying to do correct error detection from strtod without warnings
+	  and it isn't
+	  working well.
+
+	* calculator.h: Added Dprintf
+
+2003-09-30  Kyle Wheeler <kbwheel@gmail.com>
+
+	* files.c: Ran it through 'indent'
+
+	* files.c: Fixed file loading.
+
+2003-09-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c: Fixed bug
+
+	* calculator.c: Code cleanup, started the parenthesis hack.... not
+	  done yet.
+
+2003-08-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, parser.y: Fixed error stickyness.
+
+2003-08-22  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: Fixed piped input with active variables
+
+	* calculator.c: Cleaned up find_recursion per Ingo van Lil's
+	  suggestion.
+
+2003-08-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.info: added the wcalc.rc to the doc files
+
+	* NEWS, ReadMe.rtf, Wcalc.pmsp, configure, configure.in,
+	  wcalc.info, wcalc.rc, wcalc.spec: New version.
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  WcalcController.h, WcalcController.m, config.h.in, configure,
+	  definitions.h: Put the printInts preference into the GUI, updated
+	  some things for the new
+	  version.
+
+	* parser.y: Fixed extraneous output when there's errors.
+
+	* parser.y: More good error messages.
+
+	* parser.y: More sensible error messages when you try to assign new
+	  values to constants.
+
+	* calculator.c: Took the extra variable parsing out of recursion
+	  checking.
+
+	* calculator.c: Fixed a crasher on Linux (Ingo van Lil).
+
+2003-08-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.info: Silly hard-wrapping.
+
+	* wcalc.info: Updated for new version.
+
+	* COPYRIGHT, Wcalc.pbproj/kyle.pbxuser, Wcalc.pmsp, wcalc.info: New
+	  version stuff
+
+	* config.h.in, parser.y: Compiling fixes.
+
+2003-08-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, NEWS, ReadMe.rtf,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  WcalcController.m, configure, configure.in, wcalc.info,
+	  wcalc.spec: New version.
+
+	* help.c: Updating for new version.
+
+	* wcalc.1: Fixed lots of stuff
+
+	* definitions.h: Documentation
+
+	* parser.y: Small bit of labelling.
+
+	* calculator.c: Fixed command/variable conflicts.
+
+	* calculator.c: Fixed a memory leak in the recursion detection.
+
+	* calculator.c: Fixed a repeatable crash on linux (flex is weird).
+	  Fixed the recursion detection.
+
+	* main.c: Missing a semicolon.
+
+2003-08-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: Small, one-time, memory leak, before the main loop gets
+	  going.
+
+2003-08-09  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.info: Wcalc is not part of fink. This is the current .info
+	  file for creating the
+	  .deb file.
+
+	* calculator.c, calculator.h, parser.y, scanner.l: Added irandom,
+	  rand(), and irand(). rand(x) is a number between 0 and x.
+	  irand(x) is an integer between 0 and x. irandom is a random
+	  integer.
+
+	* files.c, historyManager.c: Fixed some signed/unsigned comparison
+	  warnings.
+
+2003-07-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, calculator.h, parser.y, scanner.l: Added bitwise
+	  operators & and | and ~
+
+2003-04-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, parser.y: Fixed the flatten problems. Removed some
+	  compile warnings on Solaris.
+
+2003-04-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: Forgot to add the integer pref to the config file. (CLI)
+
+	* WcalcController.m, calculator.c, calculator.h, main.c, parser.y,
+	  scanner.l: Made it so you can turn on and off the "always print
+	  integers" thing. (CLI)
+
+2003-03-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, main.c, scanner.l: Fixed some Solaris warnings.
+
+2003-03-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  WcalcController.m, configure: Version problem fixed. Added cot to
+	  the menus. Corrected the log2 thing.
+
+2003-03-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* help.h, historyManager.c, historyManager.h: Linux compiling
+	  fixes.
+
+	* ChangeLog, Makefile.am, Makefile.in, NEWS, ReadMe.rtf,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  Wcalc.pmsp, acinclude.m4, aclocal.m4, calculator.c, config.h.in,
+	  configure, configure.in, definitions.h, wcalc.1, wcalc.spec:
+	  Updated everything for the new version (1.6)
+
+	* historyManager.c, main.c, parser.y: Fixing silly compile errors.
+
+	* Wcalc.pbproj/kyle.pbxuser, help.c, scanner.l: Updated the scanner
+	  to be more flexible with opening and saving filenames, and
+	  changed the help text to reflect the new commands.
+
+	* files.c: Made it save variables in save-files as well as
+	  expressions. The variables are
+	  saved first, so they'll always be available (because I don't want
+	  to have to
+	  remember exactly at which point they were saved).
+
+2003-03-22  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/objects.nib, Makefile.am, Makefile.in,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  WcalcController.h, WcalcController.m, calculator.c, files.c,
+	  files.h, main.c, parser.y, scanner.l: Got file support working.
+	  Saves and loads history. As it loads, it evaluates,
+	  so variables stored that way are saved as well. Handles comments
+	  appropriately
+	  (read: ignores them) when loading.
+
+	* HistoryList.m, historyManager.c, historyManager.h: Discovered
+	  that history_length conflicts with readline. Fixed.
+
+	* WcalcController.h, WcalcController.m: Added an open, save, and
+	  saveAs command that do predictable things. For the moment, only
+	  open really does anything. save and saveAs display dialogs, but
+	  don't do anything with the selection (yet). also added a
+	  displayErrno function for reporting file-related errors.
+
+	* calculator.c: Fixed the flatten detection.
+
+	* parser.y: Fixed the history limit display (CLI)
+
+	* string_manip.c, string_manip.h: Added a function to remove
+	  comments from strings.
+
+	* ErrorController.m: Errors should beep.
+
+2003-03-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: Patch for decimal key from Thomas Steinhausen
+
+2003-03-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser: A few nib fixes - the drawer is now
+	  reconnected to the main window, things like that.
+
+	* calculator.c: Added recursion detection.
+
+	* WcalcController.h, WcalcController.m: Removed some strict_syntax
+	  stuff. Fixed printout of the history limit.
+	  A few miscellaneous changes.
+
+2003-02-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ., .cvsignore: Always more stuff to ignore.
+
+	* scanner.l: Improved precision specification.
+	  Added a rounding indication command.
+
+	* parser.y: Added a rounding indication command.
+
+	* main.c: Made readline pay attention to the history limit
+	  preference.
+
+	* help.c: Updated the help screen.
+
+	* definitions.h: Added a newline to the help screen.
+
+	* calculator.c: Fixed the arc- trig functions in degree mode.
+	  Added a command-line rounding indicator.
+
+2003-02-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.h, main.c, parser.y, scanner.l, wcalc.rc: Removed the
+	  strict_syntax preference (it doesn't do anything anymore).
+
+	* calculator.c: Fixed integer output to respect the engineering
+	  printout preference.
+	  Made it use the builtin prefixes for octal and hex.
+
+	* calculator.c: I'm an idiot. Simplified the integer-printing
+	  stuff.
+
+	* main.c, wcalc.rc: Added support for persistent preferences
+	  (~/.wcalcrc)
+
+	* calculator.c: If it's just an integer, print the whole thing.
+	  (fix the prefs stuff)
+
+2003-02-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile.in, Wcalc.pbproj/kyle.pbxuser, aclocal.m4, calculator.c,
+	  calculator.h, config.h.in, configure, configure.in, main.c,
+	  parser.y, scanner.l, variables.c: Added support for a ~/.wcalcrc.
+	  Changed some error-message wording here and there. Miscellaneous
+	  fixes.
+
+	* definitions.h: Added cot acot coth acoth and reformatted a
+	  little.
+
+2003-02-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, NEWS: Keeping things up to date.
+
+2003-02-19  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  WcalcController.m: Finally fixed the bizarre window behavior.
+	  Replaced it with some
+	  bizarre window behavior behind the scenes (see
+	  WcalcController.m),
+	  but I can hide that from the user.
+
+	* calculator.c, calculator.h: Added output_string... just for
+	  convenience.
+
+	* parser.y, scanner.l: Added some display functions.
+
+	* definitions.h: Updated the list of supported symbols.
+
+	* main.c: Moved the help functions.
+
+	* Makefile.am, Makefile.in, help.c, help.h: Moved help to be
+	  generic.
+
+2003-02-06  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/objects.nib, ReadMe.rtf,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  Wcalc.pmsp, definitions.h, main.c, wcalc.spec: Tiny version
+	  update.
+
+	* main.c: Fixed the ^D bug when it's compiled without readline
+	  support.
+
+	* ChangeLog, Wcalc.pbproj/kyle.pbxuser,
+	  Wcalc.pbproj/project.pbxproj, calculator.c, calculator.h,
+	  conversion.c, definitions.h, historyManager.c, string_manip.c,
+	  variables.c: Got the GUI to build properly.
+
+2003-01-29  Kyle Wheeler <kbwheel@gmail.com>
+
+	* wcalc.spec: Uses more standard rpm macros for cross-distro
+	  goodness.
+
+2003-01-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.pmsp: New version.
+
+	* ReadMe.rtf: New version.
+
+	* config.h.in, configure: Removed the AC_FUNC_REALLOC thing.
+
+	* calculator.c, main.c, parser.y, scanner.l: Moved \dsep and \tsep
+	  into the parser/scanner and fixed some configuration issues.
+
+	* variables.c: Fixed some casting warnings when compiling on Linux.
+
+2003-01-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ., .cvsignore: A few more things to ignore.
+
+	* ., .cvsignore, wcalc.spec: Pulling together a clean release.
+
+	* configure.in: Not very portable.
+
+	* Makefile.am, Makefile.in, acinclude.m4, aclocal.m4: Added the man
+	  page to automake.
+
+	* configure: More autoconf/automake
+
+	* AUTHORS, COPYING, ChangeLog, INSTALL, README, acinclude.m4,
+	  aclocal.m4, depcomp, install-sh, missing, mkinstalldirs: More
+	  pieces of autoconf/automake compatability.
+
+	* website: Doesn't need to be CVS'd anymore - it's on sourceforge.
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, Makefile, Makefile.am,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  calculator.c, calculator.h, config.h.in, configure.in,
+	  conversion.c, definitions.h, historyManager.c, main.c, parser.y,
+	  scanner.l, string_manip.c, variables.c, variables.h: Modified it
+	  for automake/autoconf
+
+2003-01-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* ChangeLog, NEWS: Moved ChangeLog to NEWS (since I discovered the
+	  ChangeLog format is very strict)
+
+2003-01-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m, historyManager.c: Finished (I think) history
+	  length limiting.
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, WcalcController.h, WcalcController.m,
+	  calculator.c, calculator.h, scanner.l: Fixed (I think) the
+	  internationalization stuff. Also began work on limiting the
+	  history length.
+
+2003-01-17  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  historyManager.h: Fixed a copyright notice. Added clear buttons
+	  to the interface. Updated the project file for use with newer
+	  versions of Project Builder.
+
+	* HistoryList.h, HistoryList.m, VariableList.h, VariableList.m,
+	  historyManager.c, historyManager.h: Added clearing functions for
+	  the History and the list of variables.
+
+2003-01-16  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m, calculator.c, calculator.h, main.c, scanner.l:
+	  Attempted fix to thousands/decimal separator handling. Also got
+	  rid of some sticky error messages (one error caused another error
+	  later).
+
+	* conversion.c: Fixed compiling problems.
+
+	* conversion.c: Alphabetized the listings.
+
+2002-12-18  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, calculator.h, parser.y, scanner.l: Added the log2
+	  command. (Should it be logtwo?)
+
+2002-11-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile: Added a prefix for installing.
+
+	* Makefile, calculator.c, main.c, string_manip.c: Fixes to get it
+	  to compile on Solaris.
+
+2002-11-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y: Fixed a crasher in error reporting.
+
+2002-10-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* website/contact.html, website/download.html,
+	  website/screenshots.html, website/wcalc.html: Just general
+	  updates
+
+2002-10-20  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile, parser.y, wcalc.spec: New version, small bugfix.
+
+	* ReadMe.rtf: New version
+
+	* Makefile, Wcalc.pmsp: New version.
+
+	* main.c: Fixed the defaults for the precision guard.
+
+	* ChangeLog, definitions.h: New version
+
+	* WcalcController.m, calculator.c, calculator.h: Implemented
+	  toggling precision control
+
+	* main.c: Documented \conservative
+
+	* parser.y, scanner.l: Added the \conservative command, to toggle
+	  conservative precision
+
+	* main.c: Documented \list
+
+2002-10-03  Kyle Wheeler <kbwheel@gmail.com>
+
+	* parser.y, scanner.l: Lists variables in command-line mode.
+
+2002-09-09  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: Another way to tell it "hex"
+
+2002-08-30  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Makefile: Alternate compiling for redhat
+
+2002-08-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* website/contact.html, website/download.html, website/index.html,
+	  website/screenshots.html, website/wcalc.html: New version
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser: *** empty log message ***
+
+	* ChangeLog, Makefile, MyTextField.m, ReadMe.rtf, Wcalc.pmsp,
+	  main.c, wcalc.1: Distribution
+
+	* Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj, website,
+	  website/.cvsignore, website/wcalc.html: *** empty log message ***
+
+	* ReadMe.rtf, Wcalc.pmsp: Synching before release
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, definitions.h: Changed
+	  the version numbers
+
+2002-08-11  Kyle Wheeler <kbwheel@gmail.com>
+
+	* MyTextField.m: Removed debugging printouts.
+
+	* ConversionList.h, ConversionList.m, WcalcController.h,
+	  WcalcController.m: Conversion functions are available in the GUI.
+
+	* conversion.c, conversion.h: Conversion functions now work.
+
+	* calculator.c: uber_converstion belongs in conversion.c
+
+2002-08-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, calculator.h, conversion.c, conversion.h,
+	  scanner.l: Getting a start on the conversions stuff.
+
+2002-07-31  Kyle Wheeler <kbwheel@gmail.com>
+
+	* string_manip.h: Stupid gcc and it's end of line at end of file
+	  nonsense.
+
+	* scanner.l: Added shell-style comment support.
+
+	* parser.y, scanner.l: Added expression/string support.
+
+	* calculator.c: Fixed variable reassignment.
+	  Fixed exessive printouts in command-line mode.
+	  Added expression support (command-line mode).
+
+	* calculator.c: Fixed a possible infinite loop.
+
+	* scanner.l: Added support for comments.
+
+	* main.c: Made the default to print prefixes (0x, etc)
+	  Added the standard -h argument support.
+	  Changed to match variables.c changes.
+
+	* MyTextField.m: Removed spacebar actions (now it's normal again).
+	  Removed errors from arrow keys.
+
+	* VariableList.m: Handles expressions now.
+
+	* string_manip.c, string_manip.h: Added justnumbers.
+
+	* scanner.l: Changed the precision syntax a bit.
+	  Added bitshifts.
+
+	* parser.y: Added bitshifts.
+	  Updated for changes in variables.c.
+
+	* variables.h: Added expressions to the variable struct.
+	  Added the answer struct.
+	  Synched the function definitions with variables.c
+
+	* variables.c: Added the _full functions for pulling out
+	  expressions too.
+	  Made the getvar functions return answer structs, to provide more
+	  information (expressions, errors, etc.)
+	  Made getvar_core exit early for zero-length keys.
+	  Added a putexp function for inserting expressions.
+	  Renamed putvar to putval (for consistency)
+
+	* calculator.c: Added the flatten function to pre-parse variables
+	  (and handle "active" variables recursively).
+	  Fixed the bitshift functions.
+
+2002-07-30  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.c, calculator.h: Added left and right bitshifts.
+
+2002-05-21  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.h, WcalcController.m: Handles '=' and 'clear' at
+	  input-time now (sorta). (also a small change getting ready for
+	  dynamic variables... probably breaks it - will commit more later
+	  that fix it again)
+
+	* MyTextField.h, MyTextField.m: Handles '=' and 'clear' at
+	  input-time now (sorta).
+
+2002-05-16  Kyle Wheeler <kbwheel@gmail.com>
+
+	* website/download.html: Removed old versions (to save web space).
+
+2002-04-12  Kyle Wheeler <kbwheel@gmail.com>
+
+	* website/contact.html, website/download.html, website/index.html,
+	  website/screenshots.html, website/wcalc.html: Version 1.4.5
+
+	* wcalc.spec: Updated the version
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: ***
+	  empty log message ***
+
+	* WcalcController.m, calculator.h, main.c, variables.c: Setup
+	  reverse-lookup table for characters (we'll need it when we print
+	  errors/numbers back out)
+
+	* scanner.l: Using reverse-lookup table for error formatting.
+
+	* calculator.c: Took out debugging printfs
+
+	* WcalcController.h: Organized the code a bit.
+
+	* WcalcController.m: No use_commas pref!
+
+	* scanner.l: Scanner error hides internationalization futzing.
+
+	* calculator.c: Stripped out the bogus internationalizing loop.
+
+	* calculator.h, parser.y: No comma-command!
+
+	* scanner.l: Back to American-only (may be some cruft left in
+	  there... I'll get it later)
+
+	* main.c: Specify separators on the fly in cmd-line.
+
+	* WcalcController.m, calculator.c, calculator.h, variables.c:
+	  Initial preprocessor support!
+
+2002-04-10  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.h, WcalcController.m, calculator.h, main.c,
+	  parser.y, scanner.l: Added a preference to optionally forget
+	  expressions that produce errors and don't return values.
+
+2002-04-09  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m, theDelegate.m: Minor code cleanups
+
+2002-03-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* WcalcController.m: Now saves the base drawer state, too.
+
+	* WcalcController.m: Now saves the history/variable state.
+
+2002-03-08  Kyle Wheeler <kbwheel@gmail.com>
+
+	* main.c: Uses new configuration structure.
+
+	* ChangeLog: Logging changes
+
+	* WcalcController.m, calculator.c, calculator.h, parser.y,
+	  scanner.l: Added cube root (cbrt)
+
+2002-03-07  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: Added square function and fixed it up with the new
+	  configuration stuff. Counting digits for sig-fig rounding
+	  indication.
+
+	* parser.y: Added square function and fixed it up with the new
+	  configuration stuff.
+
+	* WcalcController.m, calculator.c, calculator.h: Implemented the
+	  Rounding indications (Simple and Significant Figure)
+
+	* string_manip.c, string_manip.h: Added count_digits function.
+
+	* WcalcController.h, WcalcController.m, calculator.c, calculator.h:
+	  Redid preferences as a struct to make it easier to maintain.
+
+	* WcalcController.m, calculator.c, calculator.h: Visual indication
+	  of rounding. (next: sig figs)
+
+2002-03-06  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: Added Fortran-style exponent operator.
+
+2002-03-05  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj, English.lproj/.cvsignore,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib: *** empty log message ***
+
+	* English.lproj/InfoPlist.strings: version increment
+
+	* Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: ***
+	  empty log message ***
+
+	* website/w.png: The Logo
+
+	* ChangeLog: Updated changes per CVS log
+
+	* definitions.h: Incremented the version.
+
+	* WcalcController.h, WcalcController.m: Added a base drawer.
+
+2002-03-03  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.pbproj/kyle.pbxuser, website/wcalc.html: *** empty log
+	  message ***
+
+	* ReadMe.rtf, Wcalc.pmsp: Released a pre-release
+
+2002-03-02  Kyle Wheeler <kbwheel@gmail.com>
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* Makefile: Switched to yacc and flex. Added the new string
+	  manipulation files.
+
+	* website/wcalc.html: Posted notice of the mailing list I just made
+
+	* WcalcController.h: Removed a pointless pointer (heh).
+
+	* WcalcController.m: Fixed the live preference display. Fixed the
+	  menu's response the the drawer state. Made the preference panel
+	  modeless.
+
+	* scanner.l: Implemented the strict_syntax preference.
+
+	* parser.y: *** empty log message ***
+
+	* parser.y: Removed no-longer reserved variables.
+
+	* scanner.l: Stripped the wrong char from numbers with commas.
+
+	* parser.y: Fixed errors on essentially blank lines.
+
+	* WcalcController.h, WcalcController.m: Changes the period button
+	  to a comma button depending on the state. Displays the current
+	  comma preference, too.
+
+	* scanner.l: Moved commands from main.c. Added some acceptable,
+	  equivalent symbols. Fixed (I think) comma support. Added a
+	  garbage collector for goofily-formatted numbers.
+
+	* parser.y: Added smarts for piped files. Moved commands here from
+	  main.c.
+
+	* WcalcController.h, calculator.c, calculator.h: Added a preference
+	  for comma parsing pickiness.
+
+	* WcalcController.m: Added a preference for comma parsing
+	  pickiness. Fixed a continuous expression bug (new division
+	  symbol).
+
+	* main.c: Moved commands to the parser (so they'll work with piped
+	  files).
+
+	* PrefsController.h, PrefsController.m: long since outdated
+
+2002-03-01  Kyle Wheeler <kbwheel@gmail.com>
+
+	* calculator.h, main.c, parser.y, scanner.l, string_manip.c,
+	  string_manip.h: Continued fixing international comma support.
+	  Started migrating commands from main.c to the parser/scanner.
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, ReadMe.rtf,
+	  Wcalc.pbproj/kyle.pbxuser: stuff
+
+	* main.c: More CLI error printing (were previously ignoring
+	  errorstring.
+
+	* scanner.l: Added sanity/error checking to alternate bases,
+	  started complete support for commas/periods in decimal numbers
+
+	* parser.y: Fixed potential crasher freeing static memory.
+
+2002-02-28  Kyle Wheeler <kbwheel@gmail.com>
+
+	* PrefsController.m: Display use_commas preference.
+
+	* calculator.c: fixed crasher in comma-output printing
+
+	* ChangeLog: logging changes
+
+	* calculator.c: Fixed binary output.
+
+	* WcalcController.m, calculator.c, calculator.h, main.c, parser.y,
+	  scanner.l: Added sqrt, ceil, floor functions
+
+	* main.c: Added an interactive CLI "strict variable parsing"
+	  toggle.
+
+2002-02-27  Kyle Wheeler <kbwheel@gmail.com>
+
+	* scanner.l: Fixed the comma parsing.
+
+	* WcalcController.m: Made preference panel and keyboard panel
+	  placement more commonsensical.
+
+	* ChangeLog, English.lproj/InfoPlist.strings, ReadMe.rtf,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj,
+	  Wcalc.pmsp, WcalcController.m, calculator.c, definitions.h,
+	  parser.y, website/contact.html, website/download.html,
+	  website/screenshots.html, website/wcalc.html: Excessive error
+	  reporting fixed (good god)
+
+	* calculator.c: clamped too hard! fixed erroneous clamp messages
+
+	* ., .cvsignore, Wcalc.pmsp: New stuff to ignore, new version
+
+	* website/contact.html, website/download.html,
+	  website/screenshots.html, website/wcalc.html: Updating the
+	  website for the new version
+
+	* wcalc.spec: Version increase
+
+	* main.c: fixed a typo
+
+	* ReadMe.rtf: Just describing the new version (1.4.3)
+
+2002-02-26  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib: Changed the preferences
+	  layout, added comma option
+
+	* English.lproj/InfoPlist.strings: Version changes
+
+	* definitions.h: Version increment
+
+	* ChangeLog: logging changes
+
+	* main.c: Update the help
+
+	* Makefile: made it easier to manage debugging and distribution
+
+	* WcalcController.h, WcalcController.m, calculator.c, calculator.h,
+	  main.c: Added the preference to output with a comma instead of a
+	  period.
+
+	* calculator.c, main.c, parser.y: Fixed a rounding error (all
+	  negative decimals were removed!). (BOTH)
+	  Added error reporting to the command-line. (CLI)
+	  Added a radians toggle (CLI)
+
+	* ChangeLog: logging changes
+
+2002-02-25  Kyle Wheeler <kbwheel@gmail.com>
+
+	* website, website/contact.html, website/download.html,
+	  website/screenshots.html, website/wcalc.html: These belong here
+
+2002-02-24  Kyle Wheeler <kbwheel@gmail.com>
+
+	* Wcalc.pmsp: Goes with the project
+
+	* English.lproj, English.lproj/.cvsignore,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, Makefile,
+	  Wcalc.pbproj/kyle.pbxuser, WcalcController.h, WcalcController.m,
+	  historyManager.c, historyManager.h: Fixed a bug or two, made
+	  small speed improvements on preference changes.
+	  Made history redisplay configurable.
+
+	* scanner.l: Fixed the parsing (0.9 is now 0.9 and not octal 0
+	  times .9)
+
+	* ChangeLog: added a dividing line
+
+	* calculator.c: to make gcc on linux be quiet, i added a newline at
+	  the end of the file
+
+	* wcalc.spec: version increase
+
+	* Makefile: strips automatically now
+
+	* English.lproj/InfoPlist.strings, Wcalc.pbproj/project.pbxproj:
+	  stuff
+
+	* ., .cvsignore, README.txt, ReadMe.rtf: getting ready for release
+	  of 1.4.2, and tidying up
+
+	* definitions.h: version change
+
+2002-02-23  Kyle Wheeler <kbwheel@gmail.com>
+
+	* .gdb_history, definitions.h, theDelegate.h, theDelegate.m:
+	  Rectifying the repository
+
+	* Wred.png: Stuff that got left out along the way.
+
+	* WcalcController.m: Fixed the editing-after-pressing-a-button
+	  error (I'm an idiot) (GUI)
+	  Fixed the window-position saving routines (GUI)
+	  The problem with window sizing has gotten WORSE (OSX's fault?)
+	  (GUI)
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* wcalc.spec: Version changes
+
+	* scanner.l: Accepts commas as period replacements
+
+	* WcalcController.h: Merged the pref panel to be controlled more
+	  centrally (splitting it was just a pain in the butt)
+
+	* ChangeLog: Logging changes
+
+	* Makefile: Figured out this static thing (I think)
+
+	* English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  Wcalc.pbproj/project.pbxproj: stuff
+
+	* Makefile, PrefsController.h, PrefsController.m,
+	  WcalcController.h, WcalcController.m, calculator.c, calculator.h,
+	  historyManager.c, main.c, parser.y, scanner.l, wcalc.spec: Added
+	  output commands to the GUI too (GUI)
+	  Fixed debug output in the CLI (CLI)
+	  Tried to compile statically (BOTH)
+	  Supports real division symbol (BOTH)
+	  Random is now truly random, if the system supports it - relies on
+	  /dev/random (BOTH)
+
+	* ChangeLog: Logging changes
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* HistoryList.m, PrefsController.h, PrefsController.m,
+	  VariableList.m, WcalcController.m, calculator.c, calculator.h,
+	  historyManager.c, historyManager.h, main.c, parser.y, scanner.l:
+	  Saves the history (max of 1000 lines - should this be
+	  configurable?) (CLI)
+	  New commands in the CLI - (most) old ones will disappear next
+	  version (CLI)
+	  Supports hex (0x), octal (0), and binary (0b) input and output
+	  (BOTH)
+	  Cleared out some pointless error messages (CLI)
+	  Improved factorials (BOTH)
+	  Miscellaneous Bugfixes (BOTH)
+	  Tried to fix a window drifting problem (GUI)
+	  Added a "Result" column to the history (GUI)
+
+	* wcalc.spec: Version change
+
+	* ChangeLog: Logging changes
+
+	* .DS_Store: Doesn't belong in repository
+
+	* English.lproj/InfoPlist.strings,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib,
+	  Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* WcalcController.h, WcalcController.m, calculator.c, calculator.h,
+	  main.m, parser.y, scanner.l, wcalc.spec: More improvements to the
+	  parser (BOTH)
+	  Added LOTS of constants (BOTH)
+	  Added menus for functions and symbols (GUI)
+	  Added absolute value abs() (BOTH)
+	  Added a bunch of physical constants to the symbols (BOTH)
+	  Saves toggled status (GUI)
+	  Added the ability to toggle the presence of the keypad (GUI)
+
+	* ChangeLog: Logging changes
+
+	* Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: stuff
+
+	* English.lproj/InfoPlist.strings, wcalc.spec: Version change
+
+	* WcalcController.h, WcalcController.m, calculator.c, calculator.h,
+	  main.c: Began work on continuous calculations
+
+	* parser.y: Fixed the grammar again (or tried to)
+
+	* ChangeLog: Logging changes
+
+	* AboutBoxController.h, AboutBoxController.m,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib: Added the version number
+	  to the about box
+
+	* English.lproj/InfoPlist.strings: Version numbers
+
+	* calculator.h, parser.y: Fixed a typo in the grammar
+
+	* variables.c: Added newline at the end of the file to make gcc on
+	  linux shut up
+
+	* variables.h, wcalc.spec: Added newlines at the end of the file to
+	  make gcc on linux shut up
+
+	* main.c: Version change
+
+	* ChangeLog: Logging changes
+
+	* Wcalc.pbproj/kyle.pbxuser, Wcalc.pbproj/project.pbxproj: Dunno
+
+	* English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib: GUI changes
+
+	* English.lproj/InfoPlist.strings: Version number change
+
+	* HistoryList.m, PrefsController.h, PrefsController.m,
+	  WcalcController.h, WcalcController.m, calculator.c, calculator.h,
+	  historyManager.c, main.c, main.m, parser.y, scanner.l,
+	  variables.c, variables.h, wcalc.spec: Fixed the grammar (or broke
+	  it) (BOTH)
+	  Added checks to catch values with too much precision (BOTH)
+	  Precision slider won't go too far anymore (GUI)
+	  Remembers the window position (GUI)
+	  Quits when the window is closed (GUI)
+	  Saves Preferences! (GUI)
+	  Expanded the vocabulary (asin,arcsin,sin^-1) (BOTH)
+	  Added a preference to toggle using Radians (GUI)
+	  Made the history font smaller (GUI)
+	  Fixed a crasher in the history list. (GUI)
+	  Can now do floating point mods (BOTH)
+	  "random" means a random value (BOTH)
+	  added round() to round a value to the nearest whole number (BOTH)
+
+	* ChangeLog: Logging changes
+
+	* .DS_Store, .gdb_history, AboutBoxController.h,
+	  AboutBoxController.m, ChangeLog, English.lproj,
+	  English.lproj/InfoPlist.strings, English.lproj/MainMenu.nib,
+	  English.lproj/MainMenu.nib/classes.nib,
+	  English.lproj/MainMenu.nib/info.nib,
+	  English.lproj/MainMenu.nib/objects.nib, ErrorController.h,
+	  ErrorController.m, HistoryList.h, HistoryList.m, Makefile,
+	  OldVariableList.h, OldVariableList.m, PrefsController.h,
+	  PrefsController.m, README.txt, TheW.icns, VariableList.h,
+	  VariableList.m, Wcalc.pbproj, Wcalc.pbproj/kyle.pbxuser,
+	  Wcalc.pbproj/project.pbxproj, WcalcController.h,
+	  WcalcController.m, calculator.c, calculator.h, historyManager.c,
+	  historyManager.h, main.c, main.m, parser.y, scanner.l,
+	  variables.c, variables.h, w.png, wcalc.1, wcalc.spec: This commit
+	  was generated by cvs2svn to compensate for changes in r2,
+	  which included commits to RCS files with non-trunk default
+	  branches.
+
+2002-02-23  
+
+	* .: New repository initialized by cvs2svn.
+
