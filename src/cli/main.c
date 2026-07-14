@@ -1327,7 +1327,8 @@ copy_string(char       *d,
 static int
 read_prefs(void)
 {                                      /*{{{ */
-    int         fd   = openDotFile("wcalcrc", O_RDONLY);
+/*    int         fd   = openDotFile("wcalcrc", O_RDONLY | O_BINARY); */
+    int         fd   = openDotFile("wcalcrc", O_RDONLY | O_BINARY); /* - 2026-07-14 -AP- */
     char        key[BIG_STRING], value[BIG_STRING];
     size_t      curs = 0;
     size_t      curs_max;
@@ -1359,12 +1360,32 @@ read_prefs(void)
             return 0;
         }
         curs_max  = info.st_size - 1;
+/* Commento la seguente sezione per eliminare mmap, che non c'è su windows
+ *                                                      - 2026-07-14 -AP- */
+/*
         f_mutable = mmap(NULL, info.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
         if (f_mutable == MAP_FAILED) {
             perror("Could not read the preference file");
             close(fd);
             return 0;
         }
+*/
+    /* Sostituzione di mmap con malloc + read per compatibilità Windows */
+        f_mutable = (char *)malloc(info.st_size + 1);
+        if (f_mutable == NULL) {
+            perror("Could not allocate memory for preferences");
+            close(fd);
+           return 0;
+        }
+    
+        if (read(fd, f_mutable, info.st_size) < 0) {
+            perror("Could not read the preference file");
+            free(f_mutable);
+            close(fd);
+            return 0;
+        }
+        f_mutable[info.st_size] = '\0'; /* Termina la stringa in sicurezza */
+        /* modificato fin qui.                           - 2026-07-14 -AP- */
         f = f_mutable;
     }
     assert(curs_max > curs);
@@ -1419,9 +1440,11 @@ read_prefs(void)
         while (curs < curs_max && f[curs] != '\n') curs++;
         if (curs < curs_max) { curs++; }
     } while (curs < curs_max);
-    if (munmap(f_mutable, curs_max + 1)) {
+    /* Sostituzione di munmap con free per Windows UCRT64  - 2026-07-14 -AP- */
+/*  if (munmap(f_mutable, curs_max + 1)) {
         perror("Unmapping the config file");
-    }
+    }*/
+    free(f_mutable);
     if (close(fd)) {
         perror("Closing the config file");
     }

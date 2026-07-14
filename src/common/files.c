@@ -25,6 +25,11 @@
 #  include <limits.h>                  /* for PATH_MAX */
 # endif
 #endif
+/*                                   - 2026-07-14 -AP- */
+#ifdef _WIN32
+# include <windows.h>
+#endif
+/* fine modifica 01 -AP- */
 
 /* Internal Headers */
 #include "historyManager.h"
@@ -60,9 +65,12 @@ static inline void tristrncat(char       *dest,
     strncat(dest, three, len - written);
 }
 
+/* modifico la openDotFile per cercare prima nella dir corrente, poi nella
+ * %USERPROFILE e infine nella variabile HOME */
 int openDotFile(const char *dotFileName,
                 int         flags)
 {   /*{{{*/
+/*
     char       *filename = NULL;
     const char *home     = getenv("HOME");
     int         namelen;
@@ -86,7 +94,80 @@ int openDotFile(const char *dotFileName,
     } else {
         return fd;
     }
+ */
+    char       *filename = NULL;
+    const char *home     = NULL;
+    int         namelen;
+    int         fd = -1;
+
+    assert(dotFileName);
+
+#ifdef _WIN32
+    /* TENTATIVO 1: Cerca nella stessa directory dell'eseguibile wcalc.exe */
+    char exe_path[MAX_PATH];
+    if (GetModuleFileNameA(NULL, exe_path, MAX_PATH) > 0) {
+        char *last_slash = strrchr(exe_path, '\\');
+        if (last_slash != NULL) {
+            *(last_slash + 1) = '\0'; /* Tronca la stringa alla cartella */
+            
+            /* Calcola la lunghezza esatta: percorso cartella + "." + nomefile */
+            namelen = strlen(exe_path) + strlen(dotFileName) + 2;
+            filename = malloc(sizeof(char) * namelen + 1);
+            if (filename != NULL) {
+                /* Inizializza correttamente la stringa ed esegue la concatenazione sicura */
+                filename[0] = '\0';
+                strcat(filename, exe_path);
+                strcat(filename, ".");
+                strcat(filename, dotFileName);
+                
+                /* Prova ad aprire il file locale nella cartella dell'eseguibile */
+                fd = open(filename, flags, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+                free(filename);
+                filename = NULL;
+                
+                /* Se il file esiste e viene aperto, restituisce il descrittore immediatamente */
+                if (fd >= 0) {
+                    return fd;
+                }
+            }
+        }
+    }
+
+    /* TENTATIVO 2: Se il file locale non esiste, prova a leggere %USERPROFILE% di Windows */
+    home = getenv("USERPROFILE");
+#endif
+
+    /* FALLBACK: Se non siamo su Windows o %USERPROFILE% è vuoto, usa il classico HOME di Unix */
+    if (!home) {
+        home = getenv("HOME");
+    }
+
+    /* Se non viene trovata nessuna directory home valida, esce con errore */
+    if (!home) { return -1; }
+
+    /* Logica originale di calcolo lunghezza e concatenazione tramite la funzione interna tristrncat */
+    namelen = strlen(home) + strlen(dotFileName) + 3;
+#ifdef HAVE_PATH_MAX
+    if (namelen > PATH_MAX) {
+        return -2;
+    }
+#endif
+
+    filename = malloc(sizeof(char) * namelen + 1);
+    if (!filename) { return -1; }
+    
+    tristrncat(filename, namelen, home, "/.", dotFileName);
+    fd = open(filename, flags, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    free(filename);
+
+    if (fd < 0) {
+        return -3;
+    } else {
+        return fd;
+    }
 } /*}}}*/
+/* Fine modifica 02                                 - 2026-07-14 -AP- */
+
 
 int saveState(char *filename)
 {                                      /*{{{ */
