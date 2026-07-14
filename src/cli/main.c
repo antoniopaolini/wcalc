@@ -16,7 +16,9 @@
 #include <errno.h>
 #include <fcntl.h>                     /* for open() */
 #include <limits.h>                    /* for stroul() */
+#ifndef _WIN32                         /* 2026-07-14 -AP- */
 #include <sys/mman.h>                  /* for mmap() */
+#endif                                 /* 2026-07-14 -AP- */
 #include <assert.h>                    /* for assert() */
 #include <stdarg.h>                    /* for va_start() */
 #include "number.h"

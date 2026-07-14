@@ -1,6 +1,9 @@
+Starting from a clean MSYS2 UCRT64 installation:
+```
 pacman -Suy
 cd wcalc-2.5/
 pacman -S mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-make
 pacman -S make
 ./configure LDFLAGS="-static" LIBS="-lmpfr -lgmp"
 make
+```

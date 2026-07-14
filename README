@@ -17,16 +17,17 @@ This is Wcalc 2.5!
 CHANGES:
  - some modification in order to compile with MSYS2 under Windows (ucrt64).
    (use: `./configure LDFLAGS="-static" LIBS="-lmpfr -lgmp" && make`)
-   Code uploaded to https://github.com/antoniopaolini/wcalc/tree/dev-AP
    * ignore wait.h (make an empty include/sys/wait.h in order to recompile
 	 without errors)
-   * ignore mmap.h changing the opening files function definitions in main.c
+   * ignore mmap.h changing the opening files function definitions in
+	 main.c; moreover, mmap.h not included in main.c if #ifndef WIN32.
    * changed openDotFile function in common/files.c in order to check 
 	 for .wcalcrc in the same directory of the executable, then in the
 	 windows %USERPROFILE% and at last in the dir pointed by $HOME var.
    * improve output (I don't know why, but it was printing spurious
 	 "display_val\n" and "display_var\n" strings in output)
 
+ Code uploaded to https://github.com/antoniopaolini/wcalc/tree/dev-AP
 
 
 ***
